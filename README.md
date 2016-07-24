@@ -44,7 +44,7 @@ is not
 
 # **@component** (_decorator factory_)
 ## _What?_ A minimal shorthand for the 90% case
-## _How?_ Use it just like `@Component` to enjoy cleaner code and consistant selectors
+## _How?_ Use it just like `@Component()` to enjoy cleaner code and consistant selectors
 ```TypeScript
 @component(template, style) export class DynamicListViewComponent { }
 ```
@@ -88,7 +88,7 @@ which is precicesly equivalent to
 
 ## _What?_ A simple shorthand without an optional name argument
 
-## _How?_ Use it just like `@output()` except without the parenthesis
+## _How?_ Use it just like `@Output()` except without the parenthesis
 
 ```TypeScript
 @output itemAdded = new EventEmitter();
