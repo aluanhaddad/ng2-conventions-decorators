@@ -143,4 +143,4 @@ is precicely equivalent to
 ```
 
 ## _Why?_ 
-Since `@Injectable` from `'@angular/core'` takes no arguments, so it should be a decorator, not a decorator factory
+Since `@Injectable` from `'@angular/core'` takes no arguments, it should be a decorator, not a decorator factory
