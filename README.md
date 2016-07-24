@@ -6,7 +6,7 @@ A set of minimal decorators for Angular2 that leverage established conventions t
 
 # @pipe (_decorator_)
 ## _What?_ A simple, and typechecked pipe decorator
-## _How?_ Use it just like `@Pipe()` except without the parenthesis
+## _How?_ Use it just like `@Pipe()` except without the parenthesis and the redundant configuration object
 
 ```TypeScript
 @pipe export class LocalCurrencyPipe {
