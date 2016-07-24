@@ -5,17 +5,17 @@ A set of minimal decorators for Angular2 that leverage established conventions t
 #API
 
 # @pipe (_decorator_)
-## _What?_ A simple, and typechecked pipe decorator
-## _How?_ Use it just like `@Pipe()` except without the parenthesis and the redundant configuration object
+## _What?_ 
+A simple, and typechecked pipe decorator
+## _How?_ 
+Use it just like `@Pipe()` except without the parenthesis and the redundant configuration object
 
 ```TypeScript
 @pipe export class LocalCurrencyPipe {
     transform(value: string) { ... }
 }
 ```
-
 is precicely equivalent to
-
 ```TypeScript
 @Pipe({ name: 'localCurrency' }) export class LocalCurrencyPipe {
     transform(value: string) { ... }
@@ -33,7 +33,7 @@ is a TypeScript compile error while
     // forgot to implement transform
 }
 ```
-is not
+will fail at runtime.
 ## _Why?_
 1. DRY
 1. Automatically creates camelCasedFunction name
@@ -44,8 +44,10 @@ is not
 1. No need for a decorator factory when a simple decorator is cleaner and more maintainable
 
 # **@component** (_decorator factory_)
-## _What?_ A minimal shorthand for the 90% case
-## _How?_ Use it just like `@Component()` to enjoy cleaner code and consistant selectors
+## _What?_ 
+A minimal shorthand for the 90% case
+## _How?_ 
+Use it just like `@Component()` to enjoy cleaner code and consistant selectors
 ```TypeScript
 @component(template, style) export class DynamicListViewComponent { }
 ```
@@ -58,7 +60,7 @@ is not
 })
 export class DynamicListViewComponent { }
 ```
-### _Why?_
+## _Why?_
 1. DRY
 1. Automatically create snake-cased-element selector
 1. Convention over configuration
@@ -66,8 +68,10 @@ export class DynamicListViewComponent { }
 1. 99% of the time you only have one stylesheet per component
 
 # @input (_decorator_)
-## _What?_ A simple shorthand without an optional name argument
-## _How?_ Use it just like `@Input()` except without the parenthesis
+## _What?_
+A simple shorthand without an optional name argument
+## _How?_
+Use it just like `@Input()` except without the parenthesis
 ```TypeScript
 @input initialItems = [];
 ```
@@ -87,9 +91,11 @@ which is precicesly equivalent to
 
 # @output (_decorator_)
 
-## _What?_ A simple shorthand without an optional name argument
+## _What?_
+A simple shorthand without an optional name argument
 
-## _How?_ Use it just like `@Output()` except without the parenthesis
+## _How?_
+Use it just like `@Output()` except without the parenthesis
 
 ```TypeScript
 @output itemAdded = new EventEmitter();
@@ -113,9 +119,11 @@ which is precicesly equivalent to
 
 # @injectable (_decorator_)
 
-## _What?_ A simple shorthand
+## _What?_ 
+A simple dependency injection annotation
 
-## _How?_ Use it just like `@Injectable()` except without the parenthesis
+## _How?_ 
+Use it just like `@Injectable()` except without the parenthesis
 ```TypeScript
 @injectable export class AccountProfileManager {
     constructor(
