@@ -39,7 +39,7 @@ npm i ng2-conventions-decorators
 
 -----
 
-# ng2-conventions API
+# API
 
 
 
