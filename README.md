@@ -25,7 +25,14 @@ This is just one of many examples but it clearly demonstrates the following issu
 1. Hard to teach: Recommended practices are now optional, but still expected, just optional. Angular 2 is opinionated, so there is no argument for flexibility or agnosticism.
 1. Harder to maintain: To know the tag name you need to use in html you have to read every components definition or documentation.
 
-# API
+
+-----
+
+
+# ng2-conventions API
+
+
+
 # @pipe (_decorator_)
 ## _What?_ 
 A simple, and typechecked pipe decorator
