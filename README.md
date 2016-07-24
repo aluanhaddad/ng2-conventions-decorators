@@ -11,7 +11,7 @@ A set of minimal decorators for Angular2 that leverage established conventions t
 ```TypeScript
 @pipe export class LocalCurrencyPipe {
     transform(value: string) { ... }
- }
+}
 ```
 
 is precicely equivalent to
