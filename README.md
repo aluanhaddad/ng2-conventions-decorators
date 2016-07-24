@@ -78,7 +78,7 @@ is precicely equivalent to
 which is precicesly equivalent to
 
 ```TypeScript
-@Input('initialItems') items = [];
+@Input('initialItems') initialItems = [];
 ```
 
 ## _Why?_
@@ -104,7 +104,7 @@ is precicely equivalent to
 which is precicesly equivalent to
 
 ```TypeScript
-@Output('itemAdded') = new EventEmitter();
+@Output('itemAdded') itemAdded = new EventEmitter();
 ```
 
 ## _Why?_
