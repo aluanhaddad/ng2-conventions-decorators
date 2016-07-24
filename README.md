@@ -27,7 +27,17 @@ This is just one of many examples but it clearly demonstrates the following issu
 
 
 -----
+# installation
+_jspm_
+```powershell 
+jspm i ng2-conventions-decorators
+```
+_npm_
+```powershell 
+npm i ng2-conventions-decorators
+```
 
+-----
 
 # ng2-conventions API
 
