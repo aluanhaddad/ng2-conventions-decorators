@@ -1,9 +1,31 @@
 # ng2-conventions-decorators
-
 A set of minimal decorators for Angular2 that leverage established conventions to reduce boilerplate, enforce consistent APIs, and leverage static type analysis.
 
-#API
+# Rationale
+Angular 2 is very heavy on configuration, considerable heavier than AngularJS.
+For example, html element component directives should be given a snake-case-name tag-name. This is both an official recommendation and a standard html convention. 
+However, while AngularJS used a simple, easy to understand transformation to create these tag-names,
 
+JavaScript
+```JavaScript
+function someCustomElement() { ... }
+
+angular.directive({ someCustomElement });
+```
+HTML
+```html
+<some-custom-element></some-custom-element>
+```
+Angular 2 requires the tag-name be explicitely specified as an property of the component decorator factory's configuration object.
+This is just one of many examples but it clearly demonstrates the following issues:
+1. Violates DRY.
+1. Harder to maintain: You have to keep even more names in sync when refactoring.
+1. Verbose: Redundantly species configuration in strings.
+1. Error prone: Heavy use of optionality and simple strings fail to leverage strengths of Angular 2's foundational tools (e.g. TypeScript). 
+1. Hard to teach: Recommended practices are now optional, but still expected, just optional. Angular 2 is opinionated, so there is no argument for flexibility or agnosticism.
+1. Harder to maintain: To know the tag name you need to use in html you have to read every components definition or documentation.
+
+# API
 # @pipe (_decorator_)
 ## _What?_ 
 A simple, and typechecked pipe decorator
