@@ -27,7 +27,7 @@ This is just one of many examples but it clearly demonstrates the following issu
 
 
 -----
-# installation
+# Installation
 _jspm_
 ```powershell 
 jspm i ng2-conventions-decorators
@@ -76,10 +76,10 @@ will fail at runtime.
 ## _Why?_
 1. DRY
 1. Automatically creates camelCasedFunction name
-1. Ensures decorated class _actually_ provides a `transform(value)` method, at compile time
-1. When using TypeScript both we can and should take advantage of it to reduce errors
 1. Convention over configuration
 1. Always pure, no confusing `true` defaulting boolean
+1. Ensures decorated class _actually_ provides a `transform(value)` method at compile time
+1. When using TypeScript we both can and should take advantage of its semantic error checking
 1. No need for a decorator factory when a simple decorator is cleaner and more maintainable
 
 # **@component** (_decorator factory_)
