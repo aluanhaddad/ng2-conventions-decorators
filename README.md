@@ -1,4 +1,9 @@
-API
+# ng2-conventions-decorators
+
+A set of minimal decorators for Angular2 that leverage established conventions to reduce boilerplate, enforce consistent APIs, and leverage static type analysis.
+
+#API
+
 # @pipe (_decorator_)
 ## _What?_ A simple, and typechecked pipe decorator
 ## _How?_
