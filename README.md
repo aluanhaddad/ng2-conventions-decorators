@@ -25,7 +25,7 @@ _Furthermore_
 ```TypeScript
 @pipe export class LocalCurrencyPipe {
     // forgot to implement transform
- }
+}
 ```
 is a TypeScript compile error while 
 ```TypeScript
