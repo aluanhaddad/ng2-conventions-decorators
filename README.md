@@ -36,7 +36,7 @@ jspm i ng2-conventions-decorators
 ```
 _npm_
 ```powershell 
-npm i ng2-conventions-decorators
+npm i ng2-conventions-decorators --save
 ```
 
 -----
