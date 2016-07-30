@@ -17,7 +17,7 @@ HTML
 <some-custom-element></some-custom-element>
 ```
 
-Angular 2 requires the tag-name be explicitely specified as an property of the component decorator factory's configuration object.
+Angular 2 requires the tag-name be explicitly specified as an property of the component decorator factory's configuration object.
 This is just one of many examples but it clearly demonstrates the following issues:
 
 1. Violates DRY.
@@ -39,11 +39,7 @@ _npm_
 npm i ng2-conventions-decorators --save
 ```
 
------
-
 # API
-
-
 
 # @pipe (_decorator_)
 ## _What?_ 
@@ -56,7 +52,7 @@ Use it just like `@Pipe()` except without the parenthesis and the redundant conf
     transform(value: string) { ... }
 }
 ```
-is precicely equivalent to
+is precisely equivalent to
 ```TypeScript
 @Pipe({ name: 'localCurrency' }) export class LocalCurrencyPipe {
     transform(value: string) { ... }
@@ -88,16 +84,23 @@ will fail at runtime.
 ## _What?_ 
 A minimal shorthand for the 90% case
 ## _How?_ 
-Use it just like `@Component()` to enjoy cleaner code and consistant selectors
+Use it just like `@Component()` to enjoy cleaner code and consistent selectors
 ```TypeScript
 @component(template, style) export class DynamicListViewComponent { }
 ```
-  is precicely equivalent to
+  is precisely equivalent to
 ```TypeScript
 @Component({
     template,
-    styles: [style]
+    styles: [style],
     selector: 'dynamic-list-view'
+})
+export class DynamicListViewComponent { }
+```
+Need additional configuration?
+```TypeScript
+@component(template, style, {
+    directives: [ListItem]
 })
 export class DynamicListViewComponent { }
 ```
@@ -116,11 +119,11 @@ Use it just like `@Input()` except without the parenthesis
 ```TypeScript
 @input initialItems = [];
 ```
-is precicely equivalent to
+is precisely equivalent to
 ```TypeScript
 @Input() initialItems = [];
 ```
-which is precicesly equivalent to
+which is precisely equivalent to
 
 ```TypeScript
 @Input('initialItems') initialItems = [];
@@ -128,7 +131,7 @@ which is precicesly equivalent to
 
 ## _Why?_
 1. A shorter, cleaner, syntax that ensures standard naming conventions for input bindings
-1. Optional argument is 99.9% unsused, so it should be a decorator, not a decorator factory
+1. Optional argument is 99.9% unused, so it should be a decorator, not a decorator factory
 
 # @output (_decorator_)
 
@@ -142,13 +145,13 @@ Use it just like `@Output()` except without the parenthesis
 @output itemAdded = new EventEmitter();
 ```
 
-is precicely equivalent to
+is precisely equivalent to
 
 ```TypeScript
 @Output() itemAdded = new EventEmitter();
 ```
 
-which is precicesly equivalent to
+which is precisely equivalent to
 
 ```TypeScript
 @Output('itemAdded') itemAdded = new EventEmitter();
@@ -156,7 +159,7 @@ which is precicesly equivalent to
 
 ## _Why?_
 1. A shorter, cleaner, syntax that ensures standard naming conventions for output bindings
-1. Optional argument is 99.9% unsused, so it should be a decorator, not a decorator factory
+1. Optional argument is 99.9% unused, so it should be a decorator, not a decorator factory
 
 # @injectable (_decorator_)
 
@@ -173,7 +176,7 @@ Use it just like `@Injectable()` except without the parenthesis
     ) { }
 }
 ```
-is precicely equivalent to
+is precisely equivalent to
 ```TypeScript
 @Injectable() export class AccountProfileManager {
     constructor(
@@ -185,3 +188,7 @@ is precicely equivalent to
 
 ## _Why?_ 
 Since `@Injectable` from `'@angular/core'` takes no arguments, it should be a decorator, not a decorator factory
+
+
+# Implementation
+As a quick look through the source will illustrate, all of the above are implemented by delegating to the underlying @angular/core so meaning that stay in sync and up to date.
