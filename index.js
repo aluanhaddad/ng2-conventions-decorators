@@ -1,90 +1,109 @@
 "use strict";
 /**
- * The decorators exposed by this module serve as convention driven
+ * @description The decorators exposed by this module serve as convention driven
  * wrappers for various decorator _factories_ exported from @angular/core.
  * They enforce, by convention, naming guidelines for _Components_, _Input_ and _Output_ properties, and _Pipes_.
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
-var core_1 = require('@angular/core');
-var inputDecorator = function (target, propertyKey) { return core_1.Input()(target, propertyKey); };
-var outputDecorator = function (target, propertyKey) { return core_1.Output()(target, propertyKey); };
-var injectableDecorator = function (target) { return core_1.Injectable()(target); };
-var pipeDecorator = function (target) {
-    var pascalName = target.name.split('Pipe')[0];
-    var canonicalName = pascalName[0].toLowerCase() + pascalName.substr(1);
-    return core_1.Pipe({ name: canonicalName })(target);
-};
-var componentDecorator = function (template, styleOrOptions) { return function (target) {
-    var nameSegments = target.name.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
-    if (nameSegments.length > 1 && nameSegments.indexOf('Component') === nameSegments.length - 1) {
-        nameSegments.pop();
-    }
-    var snakeCasedSelector = nameSegments
-        .map(function (segment) { return segment.toLowerCase(); })
-        .join('-');
-    var options;
-    if (typeof styleOrOptions === 'string') {
-        options = { styles: [styleOrOptions], selector: snakeCasedSelector, template: template };
-    }
-    else {
-        options = styleOrOptions || {};
-        options.styles = options.styles || [];
-        options.template = template;
-        options.selector = snakeCasedSelector;
-    }
-    return core_1.Component(options)(target);
-}; };
+const core_1 = require('@angular/core');
 /**
- * Simple Input decorator for commonon case where property is not aliased.
+ * Simple Input decorator for common case where property is not aliased.
  * ```typescript
  * @input binding = 1;
- * // is equivalent to
+ * ```
+ * is equivalent to
+ * ```typescript
  * @Input() binding = 1;
  * ```
  */
-exports.input = inputDecorator;
+exports.input = (target, propertyKey) => core_1.Input()(target, propertyKey);
 /**
- * Simple Output decorator for commonon case where property is not aliased.
+ * Simple Output decorator for common case where property is not aliased.
  * ```typescript
  * @output onChange = new EventEmitter<number>();
- * // is equivalent to
+ * ```
+ * is equivalent to
+ * ```typescript
  * @Output() onChange = new EventEmitter<number>();
  * ```
  */
-exports.output = outputDecorator;
+exports.output = (target, propertyKey) => core_1.Output()(target, propertyKey);
 /**
- * Simple Injectable decorator.
+ * Simple dependency injection decorator with stronger type validation.
+ * ```typescript
+ * @injectable class MyService {
+ *     constructor(otherServe: OtherService) { }
+ * }
+ * ```
+ * is equivalent to
+ * ```typescript
+ * @Injectable() class MyService {
+ *     constructor(otherServe: OtherService) { }
+ * }
+ * ```
+ * Note that
  * ```typescript
  * @injectable class MyService { }
- * // is equivalent to
- * @Injectable() class MyService { }
  * ```
+ * is a type error because MyService does not have any dependencies.
  */
-exports.injectable = injectableDecorator;
+exports.injectable = (target) => core_1.Injectable()(target);
 /**
  * Simple Pipe decorator, enhances type safety.
  * The resulting pipe is pure.
  * Automatically uses style guide convention deriving pipe name from class name.
  * ```typescript
- * @pipe class StandardCurrencyPipe { }
+ * @pipe class StandardCurrencyPipe { transform(value); }
  * // is equivalent to
- * @Pipe({ name: 'standardCurrency' }) class StandardCurrencyPipe { }
+ * @Pipe({ name: 'standardCurrency' }) class StandardCurrencyPipe { transform(value); }
  * ```
- */
-exports.pipe = pipeDecorator;
-/**
- * Simple Component decorator resulting in a snake-cased-element tag by default.
+ * Note that
  * ```typescript
- * @component(template, style)
- * export class SomeCustomElementComponent { ... }
- * // is equivalent to
- * @Component({
- *   template,
- *   styles: [style],
- *   selector: 'some-custom-element'
- * })
- * export class SomeCustomElementComponent { ... }
+ * @pipe class StandardCurrencyPipe { }
  * ```
+ * is a type error because transform is required.
  */
-exports.component = componentDecorator;
+exports.pipe = (target) => {
+    const pascalName = target.name.split('Pipe')[0];
+    const canonicalName = pascalName[0].toLowerCase() + pascalName.substr(1);
+    return core_1.Pipe({ name: canonicalName })(target);
+};
+/**
+ * Simple dependency injection decorator with stronger type validation.
+ * ```typescript
+ * @injectable class MyService {
+ *     constructor(otherServe: OtherService) { }
+ * }
+ * // is equivalent to
+ * @Injectable() class MyService {
+ *     constructor(otherServe: OtherService) { }
+ * }
+ * ```
+ * Note that
+ * ```typescript
+ * @injectable class MyService { }
+ * ```
+ * is a type error because MyService does not have any dependencies.
+ */
+exports.component = (template, styleOrOptions, options) => {
+    return (target) => {
+        const selector = snakeCase(target.name);
+        const styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
+        const componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions ||
+            typeof styleOrOptions === 'string' && options || {});
+        componentOptions.styles = styles;
+        componentOptions.template = template;
+        componentOptions.selector = selector;
+        return core_1.Component(componentOptions)(target);
+    };
+};
+function snakeCase(identifier) {
+    const nameSegments = identifier.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
+    if (nameSegments.length > 1 && nameSegments.indexOf('Component') === nameSegments.length - 1) {
+        nameSegments.pop();
+    }
+    return nameSegments
+        .map(segment => segment.toLowerCase())
+        .join('-');
+}
 //# sourceMappingURL=index.js.map
