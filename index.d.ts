@@ -142,6 +142,4 @@ export interface ConventionBasedComponentDecorator {
     (template: string, options?: ComponentOptions): ConventionalComponentDecorator;
     (template: string, style: string, options?: ComponentOptions): ConventionalComponentDecorator;
 }
-export declare type InjectableClassDecorator = <TFunction extends new (t: T1, ...args) => any, T1 extends {
-    prototype;
-}>(target: TFunction) => TFunction | void;
+export declare type InjectableClassDecorator = <TFunction extends new (x, ...args) => any>(target: TFunction) => TFunction | void;
