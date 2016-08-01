@@ -60,7 +60,7 @@ export const output = <T>(target: T, propertyKey: string) => Output()(target, pr
  * ```
  * is a type error because MyService does not have any dependencies.
  */
-export const injectable: InjectableClassDecorator = <TFunction extends new (x: T, ...args) => any, T extends { prototype }>(target: TFunction) => Injectable()(target);
+export const injectable: InjectableClassDecorator = <TFunction extends new (x, ...args) => any>(target: TFunction) => Injectable()(target);
 
 /**
  * Simple Pipe decorator, enhances type safety.
