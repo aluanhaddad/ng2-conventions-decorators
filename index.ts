@@ -158,18 +158,20 @@ export type Constructable = new (...args: any[]) => any;
 /**
  * A semi-strongly typed provider see https://github.com/angular/angular/issues/9751 
  */
-export type Provider =
-    (
-        ProvideUsingClass
-        | Provide
-        | ProvideUsingExisting
-        | ProvideUsingFactory
-        | Constructable)[]
+export type Provider = (
+    ProvideUsingClass
     | Provide
+    | ProvideUsingExisting
+    | ProvideUsingFactory
+    | Constructable
+    | Type
+)[] |
+    Provide
     | ProvideUsingClass
     | ProvideUsingExisting
     | ProvideUsingFactory
-    | Constructable;
+    | Constructable
+    | Type;
 
 /**
  * A semi-strongly typed array of providers see https://github.com/angular/angular/issues/9751 
