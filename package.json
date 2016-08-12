@@ -5,7 +5,9 @@
   "main": "index",
   "typings": "index.d.ts",
   "scripts": {
-    "test": "Node tests/index",
+    "test": "Node test/index",
+    "test:amd": "tsc test/index.ts --module amd --target es6 --experimentalDecorators --emitDecoratorMetadata && npm run test",
+    "test:commonjs": "tsc test/index.ts --module commonjs --target es6 --experimentalDecorators --emitDecoratorMetadata && npm run test",
     "start": "tsc -w -p tsconfig.json",
     "poststart": "test",
     "prepublish": "start"
@@ -16,11 +18,13 @@
     "zone.js": "^0.6.6"
   },
   "devDependencies": {
+    "@types/core-js": "^0.9.30",
     "@types/tape": "^4.2.27",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.3",
     "tape": "4.6.0",
     "tslint": "next",
-    "typescript": "^2.0.0",
-    "reflect-metadata": "^0.1.3"
+    "typescript": "^2.0.0"
   },
   "repository": {
     "type": "git",
