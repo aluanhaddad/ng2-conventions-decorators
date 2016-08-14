@@ -7,8 +7,8 @@
   "scripts": {
     "test": "npm run build && Node test/index",
     "start": "tsc -w -p tsconfig.json",
-    "build":"tsc -p tsconfig.commonjs.json",
-    "prepublish": "build && test"
+    "build":"tsc -p tsconfig.json",
+    "prepublish": "npm build && npm test"
   },
   "dependencies": {
     "@angular/core": "^2.0.0-rc.5",

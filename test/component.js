@@ -187,7 +187,7 @@ function createPopulatedComponentOptions() {
                 transform(value) { return value; }
             }
         ],
-        precompile: [class {
+        entryComponents: [class {
             }
         ],
         properties: ['abc', '123'],

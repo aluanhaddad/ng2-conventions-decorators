@@ -133,7 +133,7 @@ export interface ComponentOptions {
     pipes?: ((new (...args) => PipeTransform) | any[])[];
     encapsulation?: ViewEncapsulation;
     interpolation?: [string, string];
-    precompile?: (Function | any[])[];
+    entryComponents?: (Function | any[])[];
 }
 export interface ConventionalComponentDecorator {
     <T extends new (...args) => any>(target: T): any;

@@ -172,7 +172,7 @@ function createPopulatedComponentOptions(): ComponentOptions {
         interpolation: ['x', 'y'],
         moduleId: 'somewhere',
         pipes: [class { transform(value): any { return value; } }],
-        precompile: [class { }],
+        entryComponents: [class { }],
         properties: ['abc', '123'],
         providers: [{ provide: 'SomeService', useClass: class Provider { }, multi: false }, [{
             provide: 'SomeServiceViaFactory', useFactory: (dep1) => dep1 + 2, deps: [1]
