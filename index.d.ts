@@ -4,7 +4,7 @@
  * They enforce, by convention, naming guidelines for _Components_, _Input_ and _Output_ properties, and _Pipes_.
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
-import { PipeTransform, ChangeDetectionStrategy, AnimationEntryMetadata, ViewEncapsulation, Type } from '@angular/core';
+import { PipeTransform, ChangeDetectionStrategy, AnimationEntryMetadata, ViewEncapsulation } from '@angular/core';
 /**
  * Simple Input decorator for common case where property is not aliased.
  * ```typescript
@@ -109,7 +109,7 @@ export declare type Constructable = new (...args: any[]) => any;
 /**
  * A semi-strongly typed provider see https://github.com/angular/angular/issues/9751
  */
-export declare type Provider = (ProvideUsingClass | Provide | ProvideUsingExisting | ProvideUsingFactory | Constructable | Type)[] | Provide | ProvideUsingClass | ProvideUsingExisting | ProvideUsingFactory | Constructable | Type;
+export declare type Provider = (ProvideUsingClass | Provide | ProvideUsingExisting | ProvideUsingFactory | Constructable | Function)[] | Provide | ProvideUsingClass | ProvideUsingExisting | ProvideUsingFactory | Constructable | Function;
 /**
  * A semi-strongly typed array of providers see https://github.com/angular/angular/issues/9751
  */
@@ -129,11 +129,11 @@ export interface ComponentOptions {
     viewProviders?: Provider[];
     changeDetection?: ChangeDetectionStrategy;
     animations?: AnimationEntryMetadata[];
-    directives?: (Type | any[])[];
+    directives?: (Function | any[])[];
     pipes?: ((new (...args) => PipeTransform) | any[])[];
     encapsulation?: ViewEncapsulation;
     interpolation?: [string, string];
-    precompile?: (Type | any[])[];
+    precompile?: (Function | any[])[];
 }
 export interface ConventionalComponentDecorator {
     <T extends new (...args) => any>(target: T): any;

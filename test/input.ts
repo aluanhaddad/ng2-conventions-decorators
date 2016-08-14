@@ -103,6 +103,19 @@ test('Class getter and setter metadata must be equivalent', tape => {
     tape.end();
 });
 
+test('Class getter and setter metadata must be equivalent when decoration is on setter', tape => {
+    const {Conventional, Standard} = createClassesWithGettersAndSettersWithDecoratorOnSet();
+
+    const decorated1 = new Conventional();
+    const decorated2 = new Standard();
+
+    const firstMetadata = Reflect.getMetadata('design:type', decorated1, 'dateAndTime');
+    const secondMetadata = Reflect.getMetadata('design:type', decorated2, 'dateAndTime');
+
+    tape.deepEqual(firstMetadata, secondMetadata);
+    tape.end();
+});
+
 function createClasses() {
     class ConventionDecorated {
         @input dateAndTime: Date;
@@ -163,7 +176,32 @@ function createClassesWithGettersAndSetters() {
         date: Date;
         @Input() get dateAndTime(): Date {
             return this.date;
-        } set dateAndTime(value) {
+        }
+        set dateAndTime(value) {
+            this.date = value;
+        }
+    };
+
+    return { Conventional, Standard };
+}
+
+function createClassesWithGettersAndSettersWithDecoratorOnSet() {
+    class Conventional {
+        date: Date;
+        get dateAndTime(): Date {
+            return this.date;
+        }
+        @input set dateAndTime(value) {
+            this.date = value;
+        }
+    };
+
+    class Standard {
+        date: Date;
+        get dateAndTime(): Date {
+            return this.date;
+        }
+        @Input() set dateAndTime(value) {
             this.date = value;
         }
     };

@@ -5,115 +5,115 @@ import {
     AnimationEntryMetadata, ChangeDetectionStrategy, ViewEncapsulation
 } from '@angular/core';
 
-// test('@component must creates snake cased selector excluding component keyword', tape => {
-//     @component('<div></div>') class DynamicListViewComponent { }
+test('@component creates snake cased selector excluding component keyword', tape => {
+    @component('<div></div>') class DynamicListViewComponent { }
 
-//     const metadataKeys = Reflect.getMetadataKeys(DynamicListViewComponent);
-//     const metadata = metadataKeys.reduce((metadata, key) => {
-//         metadata[key] = Reflect.getMetadata(key, DynamicListViewComponent);
-//         return metadata;
-//     }, {});
+    const metadataKeys = Reflect.getMetadataKeys(DynamicListViewComponent);
+    const metadata = metadataKeys.reduce((metadata, key) => {
+        metadata[key] = Reflect.getMetadata(key, DynamicListViewComponent);
+        return metadata;
+    }, {});
 
-//     tape.equal(metadata.annotations[0].selector, 'dynamic-list-view');
+    tape.equal(metadata.annotations[0].selector, 'dynamic-list-view');
 
-//     tape.end();
-// });
+    tape.end();
+});
 
-// test('@component creates full selector if component suffix is absent from class name', tape => {
-//     @component('<div></div>') class DynamicListView { }
+test('@component creates full selector if component suffix is absent from class name', tape => {
+    @component('<div></div>') class DynamicListView { }
 
-//     const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
-//     const metadata = metadataKeys.reduce((metadata, key) => {
-//         metadata[key] = Reflect.getMetadata(key, DynamicListView);
-//         return metadata;
-//     }, {});
+    const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
+    const metadata = metadataKeys.reduce((metadata, key) => {
+        metadata[key] = Reflect.getMetadata(key, DynamicListView);
+        return metadata;
+    }, {});
 
-//     tape.equal(metadata.annotations[0].selector, 'dynamic-list-view');
+    tape.equal(metadata.annotations[0].selector, 'dynamic-list-view');
 
-//     tape.end();
-// });
+    tape.end();
+});
 
-// test('@component propagates template to metadata when it is the sole argument', tape => {
-//     const template = '<div></div>';
+test('@component propagates template to metadata when it is the sole argument', tape => {
+    const template = '<div></div>';
 
-//     @component(template) class DynamicListView { }
+    @component(template) class DynamicListView { }
 
-//     const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
-//     const metadata = metadataKeys.reduce((metadata, key) => {
-//         metadata[key] = Reflect.getMetadata(key, DynamicListView);
-//         return metadata;
-//     }, {});
+    const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
+    const metadata = metadataKeys.reduce((metadata, key) => {
+        metadata[key] = Reflect.getMetadata(key, DynamicListView);
+        return metadata;
+    }, {});
 
-//     tape.equal(metadata.annotations[0].template, template);
+    tape.equal(metadata.annotations[0].template, template);
 
-//     tape.end();
-// });
+    tape.end();
+});
 
-// test('@component propagates template to metadata when it is the first of 2 arguments', tape => {
-//     const template = '<div></div>';
+test('@component propagates template to metadata when it is the first of 2 arguments', tape => {
+    const template = '<div></div>';
 
-//     @component(template, {}) class DynamicListView { }
+    @component(template, {}) class DynamicListView { }
 
-//     const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
-//     const metadata = metadataKeys.reduce((metadata, key) => {
-//         metadata[key] = Reflect.getMetadata(key, DynamicListView);
-//         return metadata;
-//     }, {});
+    const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
+    const metadata = metadataKeys.reduce((metadata, key) => {
+        metadata[key] = Reflect.getMetadata(key, DynamicListView);
+        return metadata;
+    }, {});
 
-//     tape.equal(metadata.annotations[0].template, template);
+    tape.equal(metadata.annotations[0].template, template);
 
-//     tape.end();
-// });
+    tape.end();
+});
 
-// test('@component propagates template to metadata when specified as the first argument of 3 arguments', tape => {
+test('@component propagates template to metadata when specified as the first argument of 3 arguments', tape => {
 
-//     const template = '<div></div>';
-//     @component(template, 'h1 { background:"aqua"; }', { directives: [class { }] }) class DynamicListView { }
+    const template = '<div></div>';
+    @component(template, 'h1 { background:"aqua"; }', { directives: [class { }] }) class DynamicListView { }
 
-//     const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
-//     const metadata = metadataKeys.reduce((metadata, key) => {
-//         metadata[key] = Reflect.getMetadata(key, DynamicListView);
-//         return metadata;
-//     }, {});
+    const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
+    const metadata = metadataKeys.reduce((metadata, key) => {
+        metadata[key] = Reflect.getMetadata(key, DynamicListView);
+        return metadata;
+    }, {});
 
-//     tape.deepEqual(metadata.annotations[0].template, template);
+    tape.deepEqual(metadata.annotations[0].template, template);
 
-//     tape.end();
-// });
+    tape.end();
+});
 
-// test('@component propagates style to styles metadata when specified as the 2nd of 2 arguments', tape => {
-//     const style = 'h1 { background:"aqua"; }';
+test('@component propagates style to styles metadata when specified as the 2nd of 2 arguments', tape => {
+    const style = 'h1 { background:"aqua"; }';
 
-//     @component('<div></div>', style) class DynamicListView { }
+    @component('<div></div>', style) class DynamicListView { }
 
-//     const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
-//     const metadata = metadataKeys.reduce((metadata, key) => {
-//         metadata[key] = Reflect.getMetadata(key, DynamicListView);
-//         return metadata;
-//     }, {});
+    const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
+    const metadata = metadataKeys.reduce((metadata, key) => {
+        metadata[key] = Reflect.getMetadata(key, DynamicListView);
+        return metadata;
+    }, {});
 
-//     tape.deepEqual(metadata.annotations[0].styles, [style]);
+    tape.deepEqual(metadata.annotations[0].styles, [style]);
 
-//     tape.end();
-// });
+    tape.end();
+});
 
-// test('@component propagates style to styles metadata when specified as the 2nd of 3 arguments', tape => {
-//     const style = 'h1 { background:"aqua"; }';
+test('@component propagates style to styles metadata when specified as the 2nd of 3 arguments', tape => {
+    const style = 'h1 { background:"aqua"; }';
 
-//     const template = '<div></div>';
+    const template = '<div></div>';
 
-//     @component(template, style, { directives: [class { }] }) class DynamicListView { }
+    @component(template, style, { directives: [class { }] }) class DynamicListView { }
 
-//     const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
-//     const metadata = metadataKeys.reduce((metadata, key) => {
-//         metadata[key] = Reflect.getMetadata(key, DynamicListView);
-//         return metadata;
-//     }, {});
+    const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
+    const metadata = metadataKeys.reduce((metadata, key) => {
+        metadata[key] = Reflect.getMetadata(key, DynamicListView);
+        return metadata;
+    }, {});
 
-//     tape.deepEqual(metadata.annotations[0].styles, [style]);
+    tape.deepEqual(metadata.annotations[0].styles, [style]);
 
-//     tape.end();
-// });
+    tape.end();
+});
 
 test('@component propagates all options to metadata when options is the 2nd of 2 arguments', tape => {
     const template = '<div></div>';

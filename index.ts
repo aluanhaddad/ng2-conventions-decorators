@@ -13,8 +13,7 @@ import {
     PipeTransform,
     ChangeDetectionStrategy,
     AnimationEntryMetadata,
-    ViewEncapsulation,
-    Type
+    ViewEncapsulation
 } from '@angular/core';
 
 /**
@@ -164,14 +163,14 @@ export type Provider = (
     | ProvideUsingExisting
     | ProvideUsingFactory
     | Constructable
-    | Type
+    | Function
 )[] |
     Provide
     | ProvideUsingClass
     | ProvideUsingExisting
     | ProvideUsingFactory
     | Constructable
-    | Type;
+    | Function;
 
 /**
  * A semi-strongly typed array of providers see https://github.com/angular/angular/issues/9751 
@@ -193,11 +192,11 @@ export interface ComponentOptions {
     viewProviders?: Provider[];
     changeDetection?: ChangeDetectionStrategy;
     animations?: AnimationEntryMetadata[];
-    directives?: (Type | any[])[];
+    directives?: (Function | any[])[];
     pipes?: ((new (...args) => PipeTransform) | any[])[];
     encapsulation?: ViewEncapsulation;
     interpolation?: [string, string];
-    precompile?: (Type | any[])[];
+    precompile?: (Function | any[])[];
 }
 
 export interface ConventionalComponentDecorator {

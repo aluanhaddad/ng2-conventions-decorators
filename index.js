@@ -106,3 +106,4 @@ function snakeCase(identifier) {
         .map(segment => segment.toLowerCase())
         .join('-');
 }
+//# sourceMappingURL=index.js.map

@@ -5,23 +5,22 @@
   "main": "index",
   "typings": "index.d.ts",
   "scripts": {
-    "test": "Node test/index",
-    "test:amd": "tsc test/index.ts --module amd --target es6 --experimentalDecorators --emitDecoratorMetadata && npm run test",
-    "test:commonjs": "tsc test/index.ts --module commonjs --target es6 --experimentalDecorators --emitDecoratorMetadata && npm run test",
+    "test": "npm run build && Node test/index",
     "start": "tsc -w -p tsconfig.json",
-    "poststart": "test",
-    "prepublish": "start"
+    "build":"tsc -p tsconfig.commonjs.json",
+    "prepublish": "build && test"
   },
   "dependencies": {
-    "@angular/core": "^2.0.0-rc.4",
-    "rxjs": "^5.0.0-beta.6",
-    "zone.js": "^0.6.6"
+    "@angular/core": "^2.0.0-rc.5",
+    "rxjs": "^5.0.0-beta.10",
+    "zone.js": "^0.6.12"
   },
   "devDependencies": {
-    "@types/core-js": "^0.9.30",
+    "@types/systemjs": "^0.19.28",
     "@types/tape": "^4.2.27",
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.3",
+    "systemjs": "^0.19.36",
     "tape": "4.6.0",
     "tslint": "next",
     "typescript": "^2.0.0"
