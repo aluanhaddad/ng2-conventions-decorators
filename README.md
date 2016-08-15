@@ -25,7 +25,7 @@ This is just one of many examples but it clearly demonstrates the following issu
 1. Verbose: Redundantly species configuration in strings.
 1. Error prone: Heavy use of optionality and simple strings fail to leverage strengths of Angular 2's foundational tools (e.g. TypeScript). 
 1. Hard to teach: Recommended practices are now optional, but still expected, just optional. Angular 2 is opinionated, so there is no argument for flexibility or agnosticism.
-1. Harder to maintain: To know the tag name you need to use in html you have to read every components definition or documentation.
+1. Harder to maintain: To know the tag name you need to use in html you have to read every component's definition or documentation.
 
 
 -----
