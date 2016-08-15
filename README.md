@@ -2,7 +2,7 @@
 A set of minimal decorators for Angular2 that leverage established conventions to reduce boilerplate, enforce consistent APIs, and leverage static type analysis.
 
 # Rationale
-Angular 2 is very heavy on configuration, considerable heavier than AngularJS.
+Angular 2 is very heavy on configuration, considerably heavier than AngularJS.
 For example, html element component directives should be given a snake-case-name tag-name. This is both an official recommendation and a standard html convention. 
 However, while AngularJS used a simple, easy to understand transformation to create these tag-names,
 
