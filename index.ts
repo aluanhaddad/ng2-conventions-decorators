@@ -134,6 +134,12 @@ export type Provide = {
     multi: boolean;
 }
 
+export type ProvideUsingValue = {
+    provide: any;
+    useValue: new (...args: any[]) => any;
+    multi?: boolean;
+}
+
 export type ProvideUsingClass = {
     provide: any;
     useClass: new (...args: any[]) => any;
@@ -143,7 +149,6 @@ export type ProvideUsingExisting = {
     provide: any;
     useExisting: any;
     multi?: boolean;
-
 }
 export type ProvideUsingFactory = {
     provide: any;
@@ -158,8 +163,9 @@ export type Constructable = new (...args: any[]) => any;
  * A semi-strongly typed provider see https://github.com/angular/angular/issues/9751 
  */
 export type Provider = (
-    ProvideUsingClass
-    | Provide
+    Provide
+    | ProvideUsingClass
+    | ProvideUsingValue
     | ProvideUsingExisting
     | ProvideUsingFactory
     | Constructable
@@ -167,6 +173,7 @@ export type Provider = (
 )[] |
     Provide
     | ProvideUsingClass
+    | ProvideUsingValue
     | ProvideUsingExisting
     | ProvideUsingFactory
     | Constructable
