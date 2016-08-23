@@ -12,7 +12,7 @@ require('reflect-metadata');
 const test = require('tape');
 const index_1 = require('../index');
 const core_1 = require('@angular/core');
-const extract_metadata_1 = require('./extract-metadata');
+const extract_metadata_1 = require('./helpers/extract-metadata');
 test('@component creates snake cased selector excluding component keyword', tape => {
     let DynamicListViewComponent = class DynamicListViewComponent {
     };

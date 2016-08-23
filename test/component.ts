@@ -4,7 +4,7 @@ import { component, ComponentOptions } from '../index';
 import {
     AnimationEntryMetadata, ChangeDetectionStrategy, ViewEncapsulation
 } from '@angular/core';
-import extractMetadata from './extract-metadata';
+import extractMetadata from './helpers/extract-metadata';
 
 test('@component creates snake cased selector excluding component keyword', tape => {
     @component('<div></div>') class DynamicListViewComponent { }
