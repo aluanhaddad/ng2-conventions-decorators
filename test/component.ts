@@ -1,55 +1,60 @@
 import 'reflect-metadata';
 import test = require('tape');
-import { component, ComponentOptions } from '../index';
 import {
-    AnimationEntryMetadata, ChangeDetectionStrategy, ViewEncapsulation
+    component,
+    ComponentOptions
+} from '../index';
+import {
+    AnimationEntryMetadata,
+    ChangeDetectionStrategy,
+    ViewEncapsulation
 } from '@angular/core';
 import extractMetadata from './helpers/extract-metadata';
 
-test('@component creates snake cased selector excluding component keyword', tape => {
+test('@component creates snake cased selector excluding component keyword', ({ equal, end }) => {
     @component('<div></div>') class DynamicListViewComponent { }
 
     const metadata = extractMetadata(DynamicListViewComponent);
 
-    tape.equal(metadata.annotations[0].selector, 'dynamic-list-view');
+    equal(metadata.annotations[0].selector, 'dynamic-list-view');
 
-    tape.end();
+    end();
 });
 
-test('@component creates full selector if component suffix is absent from class name', tape => {
+test('@component creates full selector if component suffix is absent from class name', ({ equal, end }) => {
     @component('<div></div>') class DynamicListView { }
 
     const metadata = extractMetadata(DynamicListView);
 
-    tape.equal(metadata.annotations[0].selector, 'dynamic-list-view');
+    equal(metadata.annotations[0].selector, 'dynamic-list-view');
 
-    tape.end();
+    end();
 });
 
-test('@component propagates template to metadata when it is the sole argument', tape => {
+test('@component propagates template to metadata when it is the sole argument', ({ equal, end }) => {
     const template = '<div></div>';
 
     @component(template) class DynamicListView { }
 
     const metadata = extractMetadata(DynamicListView);
-    tape.equal(metadata.annotations[0].template, template);
+    equal(metadata.annotations[0].template, template);
 
-    tape.end();
+    end();
 });
 
-test('@component propagates template to metadata when it is the first of 2 arguments', tape => {
+test('@component propagates template to metadata when it is the first of 2 arguments', ({ equal, end }) => {
     const template = '<div></div>';
 
     @component(template, {}) class DynamicListView { }
 
     const metadata = extractMetadata(DynamicListView);
 
-    tape.equal(metadata.annotations[0].template, template);
+    equal(metadata.annotations[0].template, template);
 
-    tape.end();
+    end();
 });
 
-test('@component propagates template to metadata when specified as the first argument of 3 arguments', tape => {
+test('@component propagates template to metadata when specified as the first argument of 3 arguments', ({ deepEqual, end }) => {
 
     const template = '<div></div>'; const style = 'h1 { background:"aqua"; }';
     @component(template, style, { directives: [class { }] }) class DynamicListView { }
@@ -60,24 +65,24 @@ test('@component propagates template to metadata when specified as the first arg
         return metadata;
     }, {});
 
-    tape.deepEqual(metadata.annotations[0].template, template);
+    deepEqual(metadata.annotations[0].template, template);
 
-    tape.end();
+    end();
 });
 
-test('@component propagates style to styles metadata when specified as the 2nd of 2 arguments', tape => {
+test('@component propagates style to styles metadata when specified as the 2nd of 2 arguments', ({ deepEqual, end }) => {
     const style = 'h1 { background:"aqua"; }';
 
     @component('<div></div>', style) class DynamicListView { }
 
     const metadata = extractMetadata(DynamicListView);
 
-    tape.deepEqual(metadata.annotations[0].styles, [style]);
+    deepEqual(metadata.annotations[0].styles, [style]);
 
-    tape.end();
+    end();
 });
 
-test('@component propagates style to styles metadata when specified as the 2nd of 3 arguments', tape => {
+test('@component propagates style to styles metadata when specified as the 2nd of 3 arguments', ({ deepEqual, end }) => {
     const style = 'h1 { background:"aqua"; }';
 
     const template = '<div></div>';
@@ -86,12 +91,12 @@ test('@component propagates style to styles metadata when specified as the 2nd o
 
     const metadata = extractMetadata(DynamicListView);
 
-    tape.deepEqual(metadata.annotations[0].styles, [style]);
+    deepEqual(metadata.annotations[0].styles, [style]);
 
-    tape.end();
+    end();
 });
 
-test('@component propagates all options to metadata when options is the 2nd of 2 arguments', tape => {
+test('@component propagates all options to metadata when options is the 2nd of 2 arguments', ({ deepEqual, end }) => {
     const template = '<div></div>';
 
     const componentOptions = createPopulatedComponentOptions();
@@ -103,13 +108,13 @@ test('@component propagates all options to metadata when options is the 2nd of 2
     Object.keys(componentOptions).forEach(key => {
         console.info(key);
         const target = metadata.annotations[0][key] === 0 ? 0 : metadata.annotations[0][key] || metadata.annotations[0][`_${key}`];
-        tape.deepEqual(componentOptions[key], target);
+        deepEqual(componentOptions[key], target);
     });
 
-    tape.end();
+    end();
 });
 
-test('@component propagates all options to metadata when options is the 3rd of 3 arguments', tape => {
+test('@component propagates all options to metadata when options is the 3rd of 3 arguments', ({ deepEqual, end }) => {
     const style = 'h1 { background:"aqua"; }';
     const template = '<div></div>';
 
@@ -122,24 +127,22 @@ test('@component propagates all options to metadata when options is the 3rd of 3
     Object.keys(componentOptions).forEach((key, index) => {
         console.info(key);
         const target = metadata.annotations[0][key] === 0 ? 0 : metadata.annotations[0][key] || metadata.annotations[0][`_${key}`];
-        tape.deepEqual(componentOptions[key], target);
+        deepEqual(componentOptions[key], target);
     });
 
-    tape.end();
+    end();
 });
 
 function createPopulatedComponentOptions(): ComponentOptions {
     return {
         animations: [new AnimationEntryMetadata('a', [])],
         changeDetection: ChangeDetectionStrategy.OnPush,
-        directives: [class { }],
         encapsulation: ViewEncapsulation.None,
         events: ['click'],
         exportAs: 'anonymous',
         host: { 'app': 'src' },
         interpolation: ['x', 'y'],
         moduleId: 'somewhere',
-        pipes: [class { transform(value): any { return value; } }],
         entryComponents: [class { }],
         properties: ['abc', '123'],
         providers: [{ provide: 'SomeService', useClass: class Provider { }, multi: false }, [{

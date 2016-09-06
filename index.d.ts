@@ -1,12 +1,14 @@
 /**
- * @description The decorators exposed by this module serve as convention driven
+ * @module
+ * @description
+ * The decorators exposed by this module serve as convention driven
  * wrappers for various decorator _factories_ exported from @angular/core.
  * They enforce, by convention, naming guidelines for _Components_, _Input_ and _Output_ properties, and _Pipes_.
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
 import { PipeTransform, ChangeDetectionStrategy, AnimationEntryMetadata, ViewEncapsulation } from '@angular/core';
 /**
- * Simple Input decorator for common case where property is not aliased.
+ * Simple Input decorator for common case where the property is not aliased.
  * ```typescript
  * @input binding = 1;
  * ```
@@ -17,7 +19,7 @@ import { PipeTransform, ChangeDetectionStrategy, AnimationEntryMetadata, ViewEnc
  */
 export declare const input: <T>(target: T, propertyKey: string) => any;
 /**
- * Simple Output decorator for common case where property is not aliased.
+ * Simple Output decorator for common case where the property is not aliased.
  * ```typescript
  * @output onChange = new EventEmitter<number>();
  * ```

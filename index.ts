@@ -1,5 +1,7 @@
 /**
- * @description The decorators exposed by this module serve as convention driven
+ * @module
+ * @description
+ * The decorators exposed by this module serve as convention driven
  * wrappers for various decorator _factories_ exported from @angular/core.
  * They enforce, by convention, naming guidelines for _Components_, _Input_ and _Output_ properties, and _Pipes_.
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
@@ -17,7 +19,7 @@ import {
 } from '@angular/core';
 
 /**
- * Simple Input decorator for common case where property is not aliased.
+ * Simple Input decorator for common case where the property is not aliased.
  * ```typescript
  * @input binding = 1; 
  * ```
@@ -29,7 +31,7 @@ import {
 export const input = <T>(target: T, propertyKey: string) => Input()(target, propertyKey);
 
 /**
- * Simple Output decorator for common case where property is not aliased.
+ * Simple Output decorator for common case where the property is not aliased.
  * ```typescript
  * @output onChange = new EventEmitter<number>();
  * ```
@@ -102,7 +104,7 @@ export const pipe = <T extends { name: string; new (...args): PipeTransform }>(t
 export const component: ConventionBasedComponentDecorator = (template: string, styleOrOptions?: string | ComponentOptions, options?: ComponentOptions) => {
     return <T extends { name: string; new (...args): any }>(target: T) => {
 
-        const selector = snakeCase(target.name);
+        const selector = snakeCase(target.name, 'Component');
 
         const styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
 
@@ -116,16 +118,6 @@ export const component: ConventionBasedComponentDecorator = (template: string, s
         return Component(componentOptions)(target);
     };
 };
-
-function snakeCase(identifier: string): string {
-    const nameSegments = identifier.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
-    if (nameSegments.length > 1 && nameSegments.indexOf('Component') === nameSegments.length - 1) {
-        nameSegments.pop();
-    }
-    return nameSegments
-        .map(segment => segment.toLowerCase())
-        .join('-');
-}
 
 export { PipeTransform }
 
@@ -207,7 +199,7 @@ export interface ComponentOptions {
 }
 
 export interface ConventionalComponentDecorator {
-    <T extends new (...args) => any>(target: T): any;
+    <T extends new (...args) => any>(target: T);
 }
 
 export interface ConventionBasedComponentDecorator {
@@ -216,3 +208,13 @@ export interface ConventionBasedComponentDecorator {
 }
 
 export type InjectableClassDecorator = <TFunction extends new (x, ...args) => any>(target: TFunction) => TFunction | void;
+
+function snakeCase(identifier: string, suffixToStrip?: string): string {
+    const nameSegments = identifier.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
+    if (nameSegments.length > 1 && suffixToStrip && nameSegments.indexOf(suffixToStrip) === nameSegments.length - 1) {
+        nameSegments.pop();
+    }
+    return nameSegments
+        .map(segment => segment.toLowerCase())
+        .join('-');
+}

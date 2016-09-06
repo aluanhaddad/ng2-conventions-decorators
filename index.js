@@ -1,13 +1,15 @@
 "use strict";
 /**
- * @description The decorators exposed by this module serve as convention driven
+ * @module
+ * @description
+ * The decorators exposed by this module serve as convention driven
  * wrappers for various decorator _factories_ exported from @angular/core.
  * They enforce, by convention, naming guidelines for _Components_, _Input_ and _Output_ properties, and _Pipes_.
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
 const core_1 = require('@angular/core');
 /**
- * Simple Input decorator for common case where property is not aliased.
+ * Simple Input decorator for common case where the property is not aliased.
  * ```typescript
  * @input binding = 1;
  * ```
@@ -18,7 +20,7 @@ const core_1 = require('@angular/core');
  */
 exports.input = (target, propertyKey) => core_1.Input()(target, propertyKey);
 /**
- * Simple Output decorator for common case where property is not aliased.
+ * Simple Output decorator for common case where the property is not aliased.
  * ```typescript
  * @output onChange = new EventEmitter<number>();
  * ```
@@ -87,7 +89,7 @@ exports.pipe = (target) => {
  */
 exports.component = (template, styleOrOptions, options) => {
     return (target) => {
-        const selector = snakeCase(target.name);
+        const selector = snakeCase(target.name, 'Component');
         const styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
         const componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions ||
             typeof styleOrOptions === 'string' && options || {});
@@ -97,9 +99,9 @@ exports.component = (template, styleOrOptions, options) => {
         return core_1.Component(componentOptions)(target);
     };
 };
-function snakeCase(identifier) {
+function snakeCase(identifier, suffixToStrip) {
     const nameSegments = identifier.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
-    if (nameSegments.length > 1 && nameSegments.indexOf('Component') === nameSegments.length - 1) {
+    if (nameSegments.length > 1 && suffixToStrip && nameSegments.indexOf(suffixToStrip) === nameSegments.length - 1) {
         nameSegments.pop();
     }
     return nameSegments
