@@ -9,208 +9,270 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 require('reflect-metadata');
-const test = require('tape');
-const index_1 = require('../index');
-const core_1 = require('@angular/core');
-test('Class metadata must be equivalent', tape => {
-    const { ConventionDecorated, Decorated } = createClasses();
-    const firstKeys = Reflect.getMetadataKeys(ConventionDecorated);
-    const secondKeys = Reflect.getMetadataKeys(Decorated);
-    const firstMetadata = firstKeys.map(key => Reflect.getMetadata(key, ConventionDecorated));
-    const secondMetadata = secondKeys.map(key => Reflect.getMetadata(key, Decorated));
+var test = require('tape');
+var index_1 = require('../index');
+var core_1 = require('@angular/core');
+test('Class metadata must be equivalent', function (tape) {
+    var _a = createClasses(), ConventionDecorated = _a.ConventionDecorated, Decorated = _a.Decorated;
+    var firstKeys = Reflect.getMetadataKeys(ConventionDecorated);
+    var secondKeys = Reflect.getMetadataKeys(Decorated);
+    var firstMetadata = firstKeys.map(function (key) { return Reflect.getMetadata(key, ConventionDecorated); });
+    var secondMetadata = secondKeys.map(function (key) { return Reflect.getMetadata(key, Decorated); });
     tape.deepEqual(firstMetadata, secondMetadata);
     tape.end();
 });
-test('Instance metadata must be equivalent', tape => {
-    const { ConventionDecorated, Decorated } = createClasses();
-    const decorated1 = new ConventionDecorated();
-    const decorated2 = new Decorated();
-    const firstKeys = Reflect.getMetadataKeys(decorated1, 'dateAndTime');
-    const secondKeys = Reflect.getMetadataKeys(decorated2, 'dateAndTime');
-    const firstMetadata = firstKeys.map(key => Reflect.getMetadata(key, decorated1, 'dateAndTime'));
-    const secondMetadata = secondKeys.map(key => Reflect.getMetadata(key, decorated2, 'dateAndTime'));
+test('Instance metadata must be equivalent', function (tape) {
+    var _a = createClasses(), ConventionDecorated = _a.ConventionDecorated, Decorated = _a.Decorated;
+    var decorated1 = new ConventionDecorated();
+    var decorated2 = new Decorated();
+    var firstKeys = Reflect.getMetadataKeys(decorated1, 'dateAndTime');
+    var secondKeys = Reflect.getMetadataKeys(decorated2, 'dateAndTime');
+    var firstMetadata = firstKeys.map(function (key) { return Reflect.getMetadata(key, decorated1, 'dateAndTime'); });
+    var secondMetadata = secondKeys.map(function (key) { return Reflect.getMetadata(key, decorated2, 'dateAndTime'); });
     tape.deepEqual(firstMetadata, secondMetadata);
     tape.end();
 });
-test('Class setter metadata must be equivalent', tape => {
-    const { Conventional, Standard } = createClassesWithSetters();
-    const firstMetadata = Reflect.getMetadata('design:type', Conventional, 'dateAndTime');
-    const secondMetadata = Reflect.getMetadata('design:type', Standard, 'dateAndTime');
+test('Class setter metadata must be equivalent', function (tape) {
+    var _a = createClassesWithSetters(), Conventional = _a.Conventional, Standard = _a.Standard;
+    var firstMetadata = Reflect.getMetadata('design:type', Conventional, 'dateAndTime');
+    var secondMetadata = Reflect.getMetadata('design:type', Standard, 'dateAndTime');
     tape.deepEqual(firstMetadata, secondMetadata);
     tape.end();
 });
-test('Instance getter metadata must be equivalent', tape => {
-    const { Conventional, Standard } = createClassesWithGetters();
-    const decorated1 = new Conventional();
-    const decorated2 = new Standard();
-    const firstMetadata = Reflect.getMetadata('design:type', decorated1, 'dateAndTime');
-    const secondMetadata = Reflect.getMetadata('design:type', decorated2, 'dateAndTime');
+test('Instance getter metadata must be equivalent', function (tape) {
+    var _a = createClassesWithGetters(), Conventional = _a.Conventional, Standard = _a.Standard;
+    var decorated1 = new Conventional();
+    var decorated2 = new Standard();
+    var firstMetadata = Reflect.getMetadata('design:type', decorated1, 'dateAndTime');
+    var secondMetadata = Reflect.getMetadata('design:type', decorated2, 'dateAndTime');
     tape.deepEqual(firstMetadata, secondMetadata);
     tape.end();
 });
-test('Class setter metadata must be equivalent', tape => {
-    const { Conventional, Standard } = createClassesWithSetters();
-    const firstMetadata = Reflect.getMetadata('design:type', Conventional, 'dateAndTime');
-    const secondMetadata = Reflect.getMetadata('design:type', Standard, 'dateAndTime');
+test('Class setter metadata must be equivalent', function (tape) {
+    var _a = createClassesWithSetters(), Conventional = _a.Conventional, Standard = _a.Standard;
+    var firstMetadata = Reflect.getMetadata('design:type', Conventional, 'dateAndTime');
+    var secondMetadata = Reflect.getMetadata('design:type', Standard, 'dateAndTime');
     tape.deepEqual(firstMetadata, secondMetadata);
     tape.end();
 });
-test('Instance setter metadata must be equivalent', tape => {
-    const { Conventional, Standard } = createClassesWithSetters();
-    const decorated1 = new Conventional();
-    const decorated2 = new Standard();
-    const firstMetadata = Reflect.getMetadata('design:type', decorated1, 'dateAndTime');
-    const secondMetadata = Reflect.getMetadata('design:type', decorated2, 'dateAndTime');
+test('Instance setter metadata must be equivalent', function (tape) {
+    var _a = createClassesWithSetters(), Conventional = _a.Conventional, Standard = _a.Standard;
+    var decorated1 = new Conventional();
+    var decorated2 = new Standard();
+    var firstMetadata = Reflect.getMetadata('design:type', decorated1, 'dateAndTime');
+    var secondMetadata = Reflect.getMetadata('design:type', decorated2, 'dateAndTime');
     tape.deepEqual(firstMetadata, secondMetadata);
     tape.end();
 });
-test('Class getter and setter metadata must be equivalent', tape => {
-    const { Conventional, Standard } = createClassesWithGettersAndSetters();
-    const firstMetadata = Reflect.getMetadata('design:type', Conventional, 'dateAndTime');
-    const secondMetadata = Reflect.getMetadata('design:type', Standard, 'dateAndTime');
+test('Class getter and setter metadata must be equivalent', function (tape) {
+    var _a = createClassesWithGettersAndSetters(), Conventional = _a.Conventional, Standard = _a.Standard;
+    var firstMetadata = Reflect.getMetadata('design:type', Conventional, 'dateAndTime');
+    var secondMetadata = Reflect.getMetadata('design:type', Standard, 'dateAndTime');
     tape.deepEqual(firstMetadata, secondMetadata);
     tape.end();
 });
-test('Class getter and setter metadata must be equivalent', tape => {
-    const { Conventional, Standard } = createClassesWithGettersAndSetters();
-    const decorated1 = new Conventional();
-    const decorated2 = new Standard();
-    const firstMetadata = Reflect.getMetadata('design:type', decorated1, 'dateAndTime');
-    const secondMetadata = Reflect.getMetadata('design:type', decorated2, 'dateAndTime');
+test('Class getter and setter metadata must be equivalent', function (tape) {
+    var _a = createClassesWithGettersAndSetters(), Conventional = _a.Conventional, Standard = _a.Standard;
+    var decorated1 = new Conventional();
+    var decorated2 = new Standard();
+    var firstMetadata = Reflect.getMetadata('design:type', decorated1, 'dateAndTime');
+    var secondMetadata = Reflect.getMetadata('design:type', decorated2, 'dateAndTime');
     tape.deepEqual(firstMetadata, secondMetadata);
     tape.end();
 });
-test('Class getter and setter metadata must be equivalent when decoration is on setter', tape => {
-    const { Conventional, Standard } = createClassesWithGettersAndSettersWithDecoratorOnSet();
-    const decorated1 = new Conventional();
-    const decorated2 = new Standard();
-    const firstMetadata = Reflect.getMetadata('design:type', decorated1, 'dateAndTime');
-    const secondMetadata = Reflect.getMetadata('design:type', decorated2, 'dateAndTime');
+test('Class getter and setter metadata must be equivalent when decoration is on setter', function (tape) {
+    var _a = createClassesWithGettersAndSettersWithDecoratorOnSet(), Conventional = _a.Conventional, Standard = _a.Standard;
+    var decorated1 = new Conventional();
+    var decorated2 = new Standard();
+    var firstMetadata = Reflect.getMetadata('design:type', decorated1, 'dateAndTime');
+    var secondMetadata = Reflect.getMetadata('design:type', decorated2, 'dateAndTime');
     tape.deepEqual(firstMetadata, secondMetadata);
     tape.end();
 });
 function createClasses() {
-    class ConventionDecorated {
-    }
-    __decorate([
-        index_1.input, 
-        __metadata('design:type', Date)
-    ], ConventionDecorated.prototype, "dateAndTime", void 0);
+    var ConventionDecorated = (function () {
+        function ConventionDecorated() {
+        }
+        __decorate([
+            index_1.input, 
+            __metadata('design:type', Date)
+        ], ConventionDecorated.prototype, "dateAndTime", void 0);
+        return ConventionDecorated;
+    }());
     ;
-    class Decorated {
-    }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Date)
-    ], Decorated.prototype, "dateAndTime", void 0);
+    var Decorated = (function () {
+        function Decorated() {
+        }
+        __decorate([
+            core_1.Input(), 
+            __metadata('design:type', Date)
+        ], Decorated.prototype, "dateAndTime", void 0);
+        return Decorated;
+    }());
     ;
-    return { ConventionDecorated, Decorated };
+    return { ConventionDecorated: ConventionDecorated, Decorated: Decorated };
 }
 function createClassesWithSetters() {
-    class Conventional {
-        set dateAndTime(value) {
-            this.date = value;
+    var Conventional = (function () {
+        function Conventional() {
         }
-    }
-    __decorate([
-        index_1.input, 
-        __metadata('design:type', Object), 
-        __metadata('design:paramtypes', [Object])
-    ], Conventional.prototype, "dateAndTime", null);
+        Object.defineProperty(Conventional.prototype, "dateAndTime", {
+            set: function (value) {
+                this.date = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            index_1.input, 
+            __metadata('design:type', Object), 
+            __metadata('design:paramtypes', [Object])
+        ], Conventional.prototype, "dateAndTime", null);
+        return Conventional;
+    }());
     ;
-    class Standard {
-        set dateAndTime(value) {
-            this.date = value;
+    var Standard = (function () {
+        function Standard() {
         }
-    }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object), 
-        __metadata('design:paramtypes', [Object])
-    ], Standard.prototype, "dateAndTime", null);
+        Object.defineProperty(Standard.prototype, "dateAndTime", {
+            set: function (value) {
+                this.date = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            core_1.Input(), 
+            __metadata('design:type', Object), 
+            __metadata('design:paramtypes', [Object])
+        ], Standard.prototype, "dateAndTime", null);
+        return Standard;
+    }());
     ;
-    return { Conventional, Standard };
+    return { Conventional: Conventional, Standard: Standard };
 }
 function createClassesWithGetters() {
-    const now = new Date();
-    class Conventional {
-        get dateAndTime() {
-            return now;
+    var now = new Date();
+    var Conventional = (function () {
+        function Conventional() {
         }
-    }
-    __decorate([
-        index_1.input, 
-        __metadata('design:type', Date)
-    ], Conventional.prototype, "dateAndTime", null);
+        Object.defineProperty(Conventional.prototype, "dateAndTime", {
+            get: function () {
+                return now;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            index_1.input, 
+            __metadata('design:type', Date)
+        ], Conventional.prototype, "dateAndTime", null);
+        return Conventional;
+    }());
     ;
-    class Standard {
-        get dateAndTime() {
-            return now;
+    var Standard = (function () {
+        function Standard() {
         }
-    }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Date)
-    ], Standard.prototype, "dateAndTime", null);
+        Object.defineProperty(Standard.prototype, "dateAndTime", {
+            get: function () {
+                return now;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            core_1.Input(), 
+            __metadata('design:type', Date)
+        ], Standard.prototype, "dateAndTime", null);
+        return Standard;
+    }());
     ;
-    return { Conventional, Standard };
+    return { Conventional: Conventional, Standard: Standard };
 }
 function createClassesWithGettersAndSetters() {
-    class Conventional {
-        get dateAndTime() {
-            return this.date;
+    var Conventional = (function () {
+        function Conventional() {
         }
-        set dateAndTime(value) {
-            this.date = value;
-        }
-    }
-    __decorate([
-        index_1.input, 
-        __metadata('design:type', Date)
-    ], Conventional.prototype, "dateAndTime", null);
+        Object.defineProperty(Conventional.prototype, "dateAndTime", {
+            get: function () {
+                return this.date;
+            },
+            set: function (value) {
+                this.date = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            index_1.input, 
+            __metadata('design:type', Date)
+        ], Conventional.prototype, "dateAndTime", null);
+        return Conventional;
+    }());
     ;
-    class Standard {
-        get dateAndTime() {
-            return this.date;
+    var Standard = (function () {
+        function Standard() {
         }
-        set dateAndTime(value) {
-            this.date = value;
-        }
-    }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Date)
-    ], Standard.prototype, "dateAndTime", null);
+        Object.defineProperty(Standard.prototype, "dateAndTime", {
+            get: function () {
+                return this.date;
+            },
+            set: function (value) {
+                this.date = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            core_1.Input(), 
+            __metadata('design:type', Date)
+        ], Standard.prototype, "dateAndTime", null);
+        return Standard;
+    }());
     ;
-    return { Conventional, Standard };
+    return { Conventional: Conventional, Standard: Standard };
 }
 function createClassesWithGettersAndSettersWithDecoratorOnSet() {
-    class Conventional {
-        get dateAndTime() {
-            return this.date;
+    var Conventional = (function () {
+        function Conventional() {
         }
-        set dateAndTime(value) {
-            this.date = value;
-        }
-    }
-    __decorate([
-        index_1.input, 
-        __metadata('design:type', Date)
-    ], Conventional.prototype, "dateAndTime", null);
+        Object.defineProperty(Conventional.prototype, "dateAndTime", {
+            get: function () {
+                return this.date;
+            },
+            set: function (value) {
+                this.date = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            index_1.input, 
+            __metadata('design:type', Date)
+        ], Conventional.prototype, "dateAndTime", null);
+        return Conventional;
+    }());
     ;
-    class Standard {
-        get dateAndTime() {
-            return this.date;
+    var Standard = (function () {
+        function Standard() {
         }
-        set dateAndTime(value) {
-            this.date = value;
-        }
-    }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Date)
-    ], Standard.prototype, "dateAndTime", null);
+        Object.defineProperty(Standard.prototype, "dateAndTime", {
+            get: function () {
+                return this.date;
+            },
+            set: function (value) {
+                this.date = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            core_1.Input(), 
+            __metadata('design:type', Date)
+        ], Standard.prototype, "dateAndTime", null);
+        return Standard;
+    }());
     ;
-    return { Conventional, Standard };
+    return { Conventional: Conventional, Standard: Standard };
 }
 //# sourceMappingURL=input.js.map

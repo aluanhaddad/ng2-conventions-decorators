@@ -7,7 +7,7 @@
  * They enforce, by convention, naming guidelines for _Components_, _Input_ and _Output_ properties, and _Pipes_.
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
-const core_1 = require('@angular/core');
+var core_1 = require('@angular/core');
 /**
  * Simple Input decorator for common case where the property is not aliased.
  * ```typescript
@@ -18,7 +18,7 @@ const core_1 = require('@angular/core');
  * @Input() binding = 1;
  * ```
  */
-exports.input = (target, propertyKey) => core_1.Input()(target, propertyKey);
+exports.input = function (target, propertyKey) { return core_1.Input()(target, propertyKey); };
 /**
  * Simple Output decorator for common case where the property is not aliased.
  * ```typescript
@@ -29,7 +29,7 @@ exports.input = (target, propertyKey) => core_1.Input()(target, propertyKey);
  * @Output() onChange = new EventEmitter<number>();
  * ```
  */
-exports.output = (target, propertyKey) => core_1.Output()(target, propertyKey);
+exports.output = function (target, propertyKey) { return core_1.Output()(target, propertyKey); };
 /**
  * Simple dependency injection decorator with stronger type validation.
  * ```typescript
@@ -49,7 +49,7 @@ exports.output = (target, propertyKey) => core_1.Output()(target, propertyKey);
  * ```
  * is a type error because MyService does not have any dependencies.
  */
-exports.injectable = (target) => core_1.Injectable()(target);
+exports.injectable = function (target) { return core_1.Injectable()(target); };
 /**
  * Simple Pipe decorator, enhances type safety.
  * The resulting pipe is pure.
@@ -65,9 +65,9 @@ exports.injectable = (target) => core_1.Injectable()(target);
  * ```
  * is a type error because transform is required.
  */
-exports.pipe = (target) => {
-    const pascalName = target.name.split('Pipe')[0];
-    const canonicalName = pascalName[0].toLowerCase() + pascalName.substr(1);
+exports.pipe = function (target) {
+    var pascalName = target.name.split('Pipe')[0];
+    var canonicalName = pascalName[0].toLowerCase() + pascalName.substr(1);
     return core_1.Pipe({ name: canonicalName })(target);
 };
 /**
@@ -87,11 +87,11 @@ exports.pipe = (target) => {
  * ```
  * is a type error because MyService does not have any dependencies.
  */
-exports.component = (template, styleOrOptions, options) => {
-    return (target) => {
-        const selector = snakeCase(target.name, 'Component');
-        const styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
-        const componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions ||
+exports.component = function (template, styleOrOptions, options) {
+    return function (target) {
+        var selector = snakeCase(target.name, 'Component');
+        var styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
+        var componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions ||
             typeof styleOrOptions === 'string' && options || {});
         componentOptions.styles = styles;
         componentOptions.template = template;
@@ -100,12 +100,12 @@ exports.component = (template, styleOrOptions, options) => {
     };
 };
 function snakeCase(identifier, suffixToStrip) {
-    const nameSegments = identifier.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
+    var nameSegments = identifier.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
     if (nameSegments.length > 1 && suffixToStrip && nameSegments.indexOf(suffixToStrip) === nameSegments.length - 1) {
         nameSegments.pop();
     }
     return nameSegments
-        .map(segment => segment.toLowerCase())
+        .map(function (segment) { return segment.toLowerCase(); })
         .join('-');
 }
 //# sourceMappingURL=index.js.map

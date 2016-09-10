@@ -1,7 +1,7 @@
 "use strict";
 function default_1(Directive) {
-    const metadataKeys = Reflect.getMetadataKeys(Directive);
-    const metadata = metadataKeys.reduce((metadata, key) => {
+    var metadataKeys = Reflect.getMetadataKeys(Directive);
+    var metadata = metadataKeys.reduce(function (metadata, key) {
         metadata[key] = Reflect.getMetadata(key, Directive);
         return metadata;
     }, {});
