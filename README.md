@@ -17,7 +17,7 @@ HTML
 <some-custom-element></some-custom-element>
 ```
 
-Angular 2 requires the tag-name be explicitly specified as an property of the component decorator factory's configuration object.
+Angular 2 requires the tag-name be explicitly specified as a property of the component decorator factory's configuration object.
 This is just one of many examples but it clearly demonstrates the following issues:
 
 1. Violates DRY.
