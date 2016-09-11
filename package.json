@@ -1,6 +1,6 @@
 {
   "name": "ng2-conventions-decorators",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "A set of minimal decorators for Angular2 that leverage established conventions to reduce boilerplate, improve maintainability, and improve type safety",
   "main": "index",
   "typings": "index.d.ts",
