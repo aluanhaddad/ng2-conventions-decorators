@@ -3,18 +3,12 @@
         "target": "es5",
         "module": "commonjs",
         "declaration": true,
-        "allowSyntheticDefaultImports": true,
-        "allowJs": false,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "removeComments": false,
         "sourceMap": true,
         "lib": [
-            "es2015"
+            "es7",
+            "dom"
         ]
-    },
-    "exclude": [
-        "node_modules",
-        "/node_modules/**"
-    ]
+    }
 }
