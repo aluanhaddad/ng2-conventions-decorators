@@ -57,7 +57,7 @@ test('@component propagates template to metadata when it is the first of 2 argum
 test('@component propagates template to metadata when specified as the first argument of 3 arguments', ({ deepEqual, end }) => {
 
     const template = '<div></div>'; const style = 'h1 { background:"aqua"; }';
-    @component(template, style, { directives: [class { }] }) class DynamicListView { }
+    @component(template, style, { providers: [class { }] }) class DynamicListView { }
 
     const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
     const metadata = metadataKeys.reduce((metadata, key) => {
@@ -87,7 +87,7 @@ test('@component propagates style to styles metadata when specified as the 2nd o
 
     const template = '<div></div>';
 
-    @component(template, style, { directives: [class { }] }) class DynamicListView { }
+    @component(template, style, { providers: [class { }] }) class DynamicListView { }
 
     const metadata = extractMetadata(DynamicListView);
 
@@ -138,13 +138,11 @@ function createPopulatedComponentOptions(): ComponentOptions {
         animations: [new AnimationEntryMetadata('a', [])],
         changeDetection: ChangeDetectionStrategy.OnPush,
         encapsulation: ViewEncapsulation.None,
-        events: ['click'],
         exportAs: 'anonymous',
         host: { 'app': 'src' },
         interpolation: ['x', 'y'],
         moduleId: 'somewhere',
         entryComponents: [class { }],
-        properties: ['abc', '123'],
         providers: [{ provide: 'SomeService', useClass: class Provider { }, multi: false }, [{
             provide: 'SomeServiceViaFactory', useFactory: (dep1) => dep1 + 2, deps: [1]
         }]],

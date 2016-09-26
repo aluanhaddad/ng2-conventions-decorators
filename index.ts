@@ -12,6 +12,7 @@ import {
     Injectable,
     Component,
     Pipe,
+    Provider,
     PipeTransform,
     ChangeDetectionStrategy,
     AnimationEntryMetadata,
@@ -121,64 +122,8 @@ export const component: ConventionBasedComponentDecorator = (template: string, s
 
 export { PipeTransform }
 
-export type Provide = {
-    provide: Provider;
-    multi: boolean;
-}
-
-export type ProvideUsingValue = {
-    provide: any;
-    useValue: new (...args: any[]) => any;
-    multi?: boolean;
-}
-
-export type ProvideUsingClass = {
-    provide: any;
-    useClass: new (...args: any[]) => any;
-    multi?: boolean;
-}
-export type ProvideUsingExisting = {
-    provide: any;
-    useExisting: any;
-    multi?: boolean;
-}
-export type ProvideUsingFactory = {
-    provide: any;
-    useFactory: (...args) => any;
-    deps: any[];
-    multi?: boolean;
-};
-
-export type Constructable = new (...args: any[]) => any;
-
-/**
- * A semi-strongly typed provider see https://github.com/angular/angular/issues/9751 
- */
-export type Provider = (
-    Provide
-    | ProvideUsingClass
-    | ProvideUsingValue
-    | ProvideUsingExisting
-    | ProvideUsingFactory
-    | Constructable
-    | Function
-)[] |
-    Provide
-    | ProvideUsingClass
-    | ProvideUsingValue
-    | ProvideUsingExisting
-    | ProvideUsingFactory
-    | Constructable
-    | Function;
-
-/**
- * A semi-strongly typed array of providers see https://github.com/angular/angular/issues/9751 
- */
-export type Providers = Provider[];
-
 export interface ComponentOptions {
     properties?: string[];
-    events?: string[];
     host?: {
         [key: string]: string;
     };
@@ -191,8 +136,6 @@ export interface ComponentOptions {
     viewProviders?: Provider[];
     changeDetection?: ChangeDetectionStrategy;
     animations?: AnimationEntryMetadata[];
-    directives?: (Function | any[])[];
-    pipes?: ((new (...args) => PipeTransform) | any[])[];
     encapsulation?: ViewEncapsulation;
     interpolation?: [string, string];
     entryComponents?: (Function | any[])[];

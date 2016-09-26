@@ -6,7 +6,7 @@
  * They enforce, by convention, naming guidelines for _Components_, _Input_ and _Output_ properties, and _Pipes_.
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
-import { PipeTransform, ChangeDetectionStrategy, AnimationEntryMetadata, ViewEncapsulation } from '@angular/core';
+import { Provider, PipeTransform, ChangeDetectionStrategy, AnimationEntryMetadata, ViewEncapsulation } from '@angular/core';
 /**
  * Simple Input decorator for common case where the property is not aliased.
  * ```typescript
@@ -67,7 +67,7 @@ export declare const injectable: InjectableClassDecorator;
 export declare const pipe: <T extends {
     new (...args: any[]): PipeTransform;
     name: string;
-}>(target: T) => any;
+}>(target: T) => T;
 /**
  * Simple dependency injection decorator with stronger type validation.
  * ```typescript
@@ -87,43 +87,8 @@ export declare const pipe: <T extends {
  */
 export declare const component: ConventionBasedComponentDecorator;
 export { PipeTransform };
-export declare type Provide = {
-    provide: Provider;
-    multi: boolean;
-};
-export declare type ProvideUsingValue = {
-    provide: any;
-    useValue: new (...args: any[]) => any;
-    multi?: boolean;
-};
-export declare type ProvideUsingClass = {
-    provide: any;
-    useClass: new (...args: any[]) => any;
-    multi?: boolean;
-};
-export declare type ProvideUsingExisting = {
-    provide: any;
-    useExisting: any;
-    multi?: boolean;
-};
-export declare type ProvideUsingFactory = {
-    provide: any;
-    useFactory: (...args) => any;
-    deps: any[];
-    multi?: boolean;
-};
-export declare type Constructable = new (...args: any[]) => any;
-/**
- * A semi-strongly typed provider see https://github.com/angular/angular/issues/9751
- */
-export declare type Provider = (Provide | ProvideUsingClass | ProvideUsingValue | ProvideUsingExisting | ProvideUsingFactory | Constructable | Function)[] | Provide | ProvideUsingClass | ProvideUsingValue | ProvideUsingExisting | ProvideUsingFactory | Constructable | Function;
-/**
- * A semi-strongly typed array of providers see https://github.com/angular/angular/issues/9751
- */
-export declare type Providers = Provider[];
 export interface ComponentOptions {
     properties?: string[];
-    events?: string[];
     host?: {
         [key: string]: string;
     };
@@ -136,8 +101,6 @@ export interface ComponentOptions {
     viewProviders?: Provider[];
     changeDetection?: ChangeDetectionStrategy;
     animations?: AnimationEntryMetadata[];
-    directives?: (Function | any[])[];
-    pipes?: ((new (...args) => PipeTransform) | any[])[];
     encapsulation?: ViewEncapsulation;
     interpolation?: [string, string];
     entryComponents?: (Function | any[])[];

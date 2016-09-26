@@ -1,6 +1,6 @@
 {
   "name": "ng2-conventions-decorators",
-  "version": "0.1.11",
+  "version": "1.0.0",
   "description": "A set of minimal decorators for Angular2 that leverage established conventions to reduce boilerplate, improve maintainability, and improve type safety",
   "main": "index",
   "typings": "index.d.ts",
@@ -11,19 +11,19 @@
     "prepublish": "npm build && npm test"
   },
   "peerDependencies": {
-    "@angular/core": "*",
-    "rxjs": "*",
-    "zone.js": "*"
+    "@angular/core": "2.0.1",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "0.6.25"
   },
   "devDependencies": {
-    "@types/systemjs": "^0.19.30",
+    "@types/systemjs": "^0.19.31",
     "@types/tape": "^4.2.27",
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.8",
-    "systemjs": "^0.19.37",
+    "systemjs": "^0.19.39",
     "tape": "4.6.0",
     "tslint": "*",
-    "typescript": "^2.0.0"
+    "typescript": "2.0.3"
   },
   "repository": {
     "type": "git",

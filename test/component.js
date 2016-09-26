@@ -83,7 +83,7 @@ test('@component propagates template to metadata when specified as the first arg
         function DynamicListView() {
         }
         DynamicListView = __decorate([
-            index_1.component(template, style, { directives: [(function () {
+            index_1.component(template, style, { providers: [(function () {
                         function class_1() {
                         }
                         return class_1;
@@ -124,7 +124,7 @@ test('@component propagates style to styles metadata when specified as the 2nd o
         function DynamicListView() {
         }
         DynamicListView = __decorate([
-            index_1.component(template, style, { directives: [(function () {
+            index_1.component(template, style, { providers: [(function () {
                         function class_2() {
                         }
                         return class_2;
@@ -185,7 +185,6 @@ function createPopulatedComponentOptions() {
         animations: [new core_1.AnimationEntryMetadata('a', [])],
         changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         encapsulation: core_1.ViewEncapsulation.None,
-        events: ['click'],
         exportAs: 'anonymous',
         host: { 'app': 'src' },
         interpolation: ['x', 'y'],
@@ -195,7 +194,6 @@ function createPopulatedComponentOptions() {
                 }
                 return class_3;
             }())],
-        properties: ['abc', '123'],
         providers: [{ provide: 'SomeService', useClass: (function () {
                     function Provider() {
                     }
