@@ -21,7 +21,7 @@
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.8",
     "systemjs": "^0.19.39",
-    "tape": "4.6.0",
+    "tape": "4.6.2",
     "tslint": "*",
     "typescript": "2.0.3"
   },
