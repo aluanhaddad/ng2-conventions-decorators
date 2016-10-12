@@ -7,7 +7,7 @@
  * They enforce, by convention, naming guidelines for _Components_, _Input_ and _Output_ properties, and _Pipes_.
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 /**
  * Simple Input decorator for common case where the property is not aliased.
  * ```typescript
@@ -71,25 +71,33 @@ exports.pipe = function (target) {
     return core_1.Pipe({ name: canonicalName })(target);
 };
 /**
- * Simple dependency injection decorator with stronger type validation.
+ * A convention based component decorator that creates a kebab-cased-element selector and enforces required parameters.
+ * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+ * @param style The style string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+ * @param options additional component options.
+ *
  * ```typescript
- * @injectable class MyService {
- *     constructor(otherServe: OtherService) { }
- * }
+ * @component(template, style) export class SomeCustomElementComponent { ... }
  * // is equivalent to
- * @Injectable() class MyService {
- *     constructor(otherServe: OtherService) { }
- * }
+ * @Component({
+ *   template,
+ *   styles: [style],
+ *   selector: 'some-custom-element'
+ * })
+ * export class SomeCustomElementComponent { ... }
  * ```
- * Note that
  * ```typescript
- * @injectable class MyService { }
+ * @component(template) export class SomeCustomElementComponent { ... }
+ * // is equivalent to
+ * @Component({
+ *   template,
+ *   selector: 'some-custom-element'
+ * }) export class SomeCustomElementComponent { ... }
  * ```
- * is a type error because MyService does not have any dependencies.
  */
 exports.component = function (template, styleOrOptions, options) {
     return function (target) {
-        var selector = snakeCase(target.name, 'Component');
+        var selector = kebabCase(target.name, 'Component');
         var styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
         var componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions ||
             typeof styleOrOptions === 'string' && options || {});
@@ -99,13 +107,54 @@ exports.component = function (template, styleOrOptions, options) {
         return core_1.Component(componentOptions)(target);
     };
 };
-function snakeCase(identifier, suffixToStrip) {
-    var nameSegments = identifier.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
+/**
+ * A convention based directive decorator that creates a Directive with an automatically, bracketed, camelCased `[myEnhancement]`
+ * and is exported as `myEnhancement` for a class.
+ * @param target the Directive class
+ *
+ * TODO: In the future, the `property` with name selector check should be done at compile time if possible.
+ * This may be possible with the TypeScript 2.1.0's forthcoming `keysOf` operator.
+ */
+function directive(target) {
+    var camelCaseName = camelCase(target.name);
+    var selector = "[" + camelCaseName + "]";
+    var requiredProperty = target.prototype[camelCaseName];
+    if (!Reflect.getOwnMetadata('propMetadata', target)[camelCaseName]) {
+        throw TypeError("no @Input property with key " + camelCaseName + " required by " + selector + ", specified");
+    }
+    return core_1.Directive({
+        selector: selector,
+        exportAs: camelCaseName
+    })(target);
+}
+exports.directive = directive;
+;
+/**
+ * A convenience function which creates a new EventEmitter which emits events of the specified type.
+ * ```typescriptm
+ * @output propertyChange = emitter<{ name; value }>();
+ * ```
+ */
+function emitter() {
+    return new core_1.EventEmitter();
+}
+exports.emitter = emitter;
+function kebabCase(identifier, suffixToStrip) {
+    var name = suffixToStrip ? stripSuffix(identifier, suffixToStrip) : identifier;
+    var nameSegments = name.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
     if (nameSegments.length > 1 && suffixToStrip && nameSegments.indexOf(suffixToStrip) === nameSegments.length - 1) {
         nameSegments.pop();
     }
     return nameSegments
         .map(function (segment) { return segment.toLowerCase(); })
         .join('-');
+}
+function camelCase(identifier) {
+    var selector = stripSuffix(identifier.substr(1), 'Directive');
+    return "" + identifier[0].toLowerCase() + selector;
+}
+function stripSuffix(value, suffix) {
+    var location = value.lastIndexOf(suffix);
+    return location > 0 ? value.substr(0, value.length - suffix.length) : value;
 }
 //# sourceMappingURL=index.js.map

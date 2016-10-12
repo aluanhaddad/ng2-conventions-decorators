@@ -38,3 +38,5 @@ jspm_packages
 
 /.vscode
 /.vs
+/slnx.VC.VC.opendb
+/slnx.VC.db

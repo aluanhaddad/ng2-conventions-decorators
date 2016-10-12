@@ -11,8 +11,10 @@ import {
 } from '@angular/core';
 import extractMetadata from './helpers/extract-metadata';
 
-test('@component creates snake cased selector excluding component keyword', ({ equal, end }) => {
-    @component('<div></div>') class DynamicListViewComponent { }
+const template = '<div></div>';
+
+test('@component creates kebab-cased selector excluding "Component" suffix', ({ equal, end }) => {
+    @component(template) class DynamicListViewComponent { }
 
     const metadata = extractMetadata(DynamicListViewComponent);
 
@@ -22,7 +24,7 @@ test('@component creates snake cased selector excluding component keyword', ({ e
 });
 
 test('@component creates full selector if component suffix is absent from class name', ({ equal, end }) => {
-    @component('<div></div>') class DynamicListView { }
+    @component(template) class DynamicListView { }
 
     const metadata = extractMetadata(DynamicListView);
 
@@ -32,8 +34,6 @@ test('@component creates full selector if component suffix is absent from class 
 });
 
 test('@component propagates template to metadata when it is the sole argument', ({ equal, end }) => {
-    const template = '<div></div>';
-
     @component(template) class DynamicListView { }
 
     const metadata = extractMetadata(DynamicListView);
@@ -43,7 +43,6 @@ test('@component propagates template to metadata when it is the sole argument', 
 });
 
 test('@component propagates template to metadata when it is the first of 2 arguments', ({ equal, end }) => {
-    const template = '<div></div>';
 
     @component(template, {}) class DynamicListView { }
 
@@ -54,9 +53,8 @@ test('@component propagates template to metadata when it is the first of 2 argum
     end();
 });
 
-test('@component propagates template to metadata when specified as the first argument of 3 arguments', ({ deepEqual, end }) => {
-
-    const template = '<div></div>'; const style = 'h1 { background:"aqua"; }';
+test('@component propagates template to metadata when specified as the first argument of 3 arguments', ({deepEqual, end}) => {
+    const style = 'h1 { background:"aqua"; }';
     @component(template, style, { providers: [class { }] }) class DynamicListView { }
 
     const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
@@ -70,8 +68,8 @@ test('@component propagates template to metadata when specified as the first arg
     end();
 });
 
-test('@component propagates style to styles metadata when specified as the 2nd of 2 arguments', ({ deepEqual, end }) => {
-    const style = 'h1 { background:"aqua"; }';
+test('@component propagates style to styles metadata when specified as the 2nd of 2 arguments', ({deepEqual, end}) => {
+    const style = 'h1 { background: "aqua"; }';
 
     @component('<div></div>', style) class DynamicListView { }
 
@@ -82,10 +80,8 @@ test('@component propagates style to styles metadata when specified as the 2nd o
     end();
 });
 
-test('@component propagates style to styles metadata when specified as the 2nd of 3 arguments', ({ deepEqual, end }) => {
-    const style = 'h1 { background:"aqua"; }';
-
-    const template = '<div></div>';
+test('@component propagates style to styles metadata when specified as the 2nd of 3 arguments', ({deepEqual, end}) => {
+    const style = 'h1 { background: "aqua"; }';
 
     @component(template, style, { providers: [class { }] }) class DynamicListView { }
 
@@ -96,9 +92,7 @@ test('@component propagates style to styles metadata when specified as the 2nd o
     end();
 });
 
-test('@component propagates all options to metadata when options is the 2nd of 2 arguments', ({ deepEqual, end }) => {
-    const template = '<div></div>';
-
+test('@component propagates all options to metadata when options is the 2nd of 2 arguments', ({deepEqual, end}) => {
     const componentOptions = createPopulatedComponentOptions();
 
     @component(template, componentOptions) class DynamicListView { }
@@ -114,7 +108,7 @@ test('@component propagates all options to metadata when options is the 2nd of 2
     end();
 });
 
-test('@component propagates all options to metadata when options is the 3rd of 3 arguments', ({ deepEqual, end }) => {
+test('@component propagates all options to metadata when options is the 3rd of 3 arguments', ({deepEqual, end}) => {
     const style = 'h1 { background:"aqua"; }';
     const template = '<div></div>';
 

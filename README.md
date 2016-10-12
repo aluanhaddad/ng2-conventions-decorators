@@ -3,7 +3,7 @@ A set of minimal decorators for Angular2 that leverage established conventions t
 
 # Rationale
 Angular 2 is very heavy on configuration, considerably heavier than AngularJS.
-For example, html element component directives should be given a snake-case-name tag-name. This is both an official recommendation and a standard html convention. 
+For example, html element component directives should be given a kebab-case-name tag-name. This is both an official recommendation and a standard html convention. 
 However, while AngularJS used a simple, easy to understand transformation to create these tag-names,
 
 JavaScript
@@ -106,7 +106,7 @@ export class DynamicListViewComponent { }
 ```
 ## _Why?_
 1. DRY
-1. Automatically create snake-cased-element selector
+1. Automatically create kebab-cased-element selector
 1. Convention over configuration
 1. Ensures standard selector naming conventions
 1. 99% of the time you only have one stylesheet per component

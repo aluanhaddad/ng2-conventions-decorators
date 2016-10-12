@@ -6,7 +6,7 @@
  * They enforce, by convention, naming guidelines for _Components_, _Input_ and _Output_ properties, and _Pipes_.
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
-import { Provider, PipeTransform, ChangeDetectionStrategy, AnimationEntryMetadata, ViewEncapsulation } from '@angular/core';
+import { EventEmitter, Provider, PipeTransform, ChangeDetectionStrategy, AnimationEntryMetadata, ViewEncapsulation } from '@angular/core';
 /**
  * Simple Input decorator for common case where the property is not aliased.
  * ```typescript
@@ -69,23 +69,40 @@ export declare const pipe: <T extends {
     name: string;
 }>(target: T) => T;
 /**
- * Simple dependency injection decorator with stronger type validation.
+ * A convention based component decorator that creates a kebab-cased-element selector and enforces required parameters.
+ * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+ * @param style The style string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+ * @param options additional component options.
+ *
  * ```typescript
- * @injectable class MyService {
- *     constructor(otherServe: OtherService) { }
- * }
+ * @component(template, style) export class SomeCustomElementComponent { ... }
  * // is equivalent to
- * @Injectable() class MyService {
- *     constructor(otherServe: OtherService) { }
- * }
+ * @Component({
+ *   template,
+ *   styles: [style],
+ *   selector: 'some-custom-element'
+ * })
+ * export class SomeCustomElementComponent { ... }
  * ```
- * Note that
  * ```typescript
- * @injectable class MyService { }
+ * @component(template) export class SomeCustomElementComponent { ... }
+ * // is equivalent to
+ * @Component({
+ *   template,
+ *   selector: 'some-custom-element'
+ * }) export class SomeCustomElementComponent { ... }
  * ```
- * is a type error because MyService does not have any dependencies.
  */
 export declare const component: ConventionBasedComponentDecorator;
+/**
+ * A convention based directive decorator that creates a Directive with an automatically, bracketed, camelCased `[myEnhancement]`
+ * and is exported as `myEnhancement` for a class.
+ * @param target the Directive class
+ *
+ * TODO: In the future, the `property` with name selector check should be done at compile time if possible.
+ * This may be possible with the TypeScript 2.1.0's forthcoming `keysOf` operator.
+ */
+export declare function directive<T extends Manifest>(target: T): T;
 export { PipeTransform };
 export interface ComponentOptions {
     properties?: string[];
@@ -106,10 +123,51 @@ export interface ComponentOptions {
     entryComponents?: (Function | any[])[];
 }
 export interface ConventionalComponentDecorator {
-    <T extends new (...args) => any>(target: T): any;
+    <T extends Manifest>(target: T): any;
 }
+/**
+ * A convention based component decorator that creates a kebab-cased-element selector and enforces required parameters.
+ * ```typescript
+ * @component(template, style) export class SomeCustomElementComponent { ... }
+ * // is equivalent to
+ * @Component({
+ *   template,
+ *   styles: [style],
+ *   selector: 'some-custom-element'
+ * })
+ * export class SomeCustomElementComponent { ... }
+ * ```
+ * ```typescript
+ * @component(template) export class SomeCustomElementComponent { ... }
+ * // is equivalent to
+ * @Component({
+ *   template,
+ *   selector: 'some-custom-element'
+ * }) export class SomeCustomElementComponent { ... }
+ * ```
+ */
 export interface ConventionBasedComponentDecorator {
+    /**
+     * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+     * @param options additional component options.
+     */
     (template: string, options?: ComponentOptions): ConventionalComponentDecorator;
+    /**
+     * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+     * @param style The style string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+     * @param options additional component options.
+     */
     (template: string, style: string, options?: ComponentOptions): ConventionalComponentDecorator;
 }
 export declare type InjectableClassDecorator = <TFunction extends new (x, ...args) => any>(target: TFunction) => TFunction | void;
+export declare type Manifest = {
+    new (...args);
+    name: string;
+};
+/**
+ * A convenience function which creates a new EventEmitter which emits events of the specified type.
+ * ```typescriptm
+ * @output propertyChange = emitter<{ name; value }>();
+ * ```
+ */
+export declare function emitter<TEvent>(): EventEmitter<TEvent>;
