@@ -115,23 +115,17 @@ exports.component = function (template, styleOrOptions, options) {
  * TODO: In the future, the `property` with name selector check should be done at compile time if possible.
  * This may be possible with the TypeScript 2.1.0's forthcoming `keysOf` operator.
  */
-function directive(target) {
+exports.directive = function (target) {
     var camelCaseName = camelCase(target.name);
     var selector = "[" + camelCaseName + "]";
-    var requiredProperty = target.prototype[camelCaseName];
     if (!Reflect.getOwnMetadata('propMetadata', target)[camelCaseName]) {
         throw TypeError("no @Input property with key " + camelCaseName + " required by " + selector + ", specified");
     }
-    return core_1.Directive({
-        selector: selector,
-        exportAs: camelCaseName
-    })(target);
-}
-exports.directive = directive;
-;
+    return core_1.Directive({ selector: selector, exportAs: camelCaseName })(target);
+};
 /**
  * A convenience function which creates a new EventEmitter which emits events of the specified type.
- * ```typescriptm
+ * ```typescript
  * @output propertyChange = emitter<{ name; value }>();
  * ```
  */

@@ -102,7 +102,7 @@ export declare const component: ConventionBasedComponentDecorator;
  * TODO: In the future, the `property` with name selector check should be done at compile time if possible.
  * This may be possible with the TypeScript 2.1.0's forthcoming `keysOf` operator.
  */
-export declare function directive<T extends Manifest>(target: T): T;
+export declare const directive: <T extends Manifest>(target: T) => T;
 export { PipeTransform };
 export interface ComponentOptions {
     properties?: string[];
@@ -122,7 +122,13 @@ export interface ComponentOptions {
     interpolation?: [string, string];
     entryComponents?: (Function | any[])[];
 }
+/**
+ * The type of a decorator returned by the an invocation `component` decorator factory.
+ */
 export interface ConventionalComponentDecorator {
+    /**
+     * @parm target The class to decorate.
+     */
     <T extends Manifest>(target: T): any;
 }
 /**
@@ -160,13 +166,16 @@ export interface ConventionBasedComponentDecorator {
     (template: string, style: string, options?: ComponentOptions): ConventionalComponentDecorator;
 }
 export declare type InjectableClassDecorator = <TFunction extends new (x, ...args) => any>(target: TFunction) => TFunction | void;
+/**
+ * An alias for a Function with a [[Construct]] internal slot.
+ */
 export declare type Manifest = {
     new (...args);
     name: string;
 };
 /**
  * A convenience function which creates a new EventEmitter which emits events of the specified type.
- * ```typescriptm
+ * ```typescript
  * @output propertyChange = emitter<{ name; value }>();
  * ```
  */

@@ -137,18 +137,13 @@ export const component: ConventionBasedComponentDecorator = (template: string, s
  * TODO: In the future, the `property` with name selector check should be done at compile time if possible.
  * This may be possible with the TypeScript 2.1.0's forthcoming `keysOf` operator.
  */
-export function directive<T extends Manifest>(target: T) {
+export const directive = <T extends Manifest>(target: T) => {
   const camelCaseName = camelCase(target.name);
   const selector = `[${camelCaseName}]`;
-  var requiredProperty = target.prototype[camelCaseName];
   if (!Reflect.getOwnMetadata('propMetadata', target)[camelCaseName]) {
     throw TypeError(`no @Input property with key ${camelCaseName} required by ${selector}, specified`);
   }
-
-  return Directive({
-    selector,
-    exportAs: camelCaseName
-  })(target);
+  return Directive({ selector, exportAs: camelCaseName})(target);
 };
 
 export { PipeTransform }
@@ -172,7 +167,13 @@ export interface ComponentOptions {
   entryComponents?: (Function | any[])[];
 }
 
+/**
+ * The type of a decorator returned by the an invocation `component` decorator factory.
+ */
 export interface ConventionalComponentDecorator {
+  /**
+   * @parm target The class to decorate.
+   */
   <T extends Manifest>(target: T);
 }
 
@@ -211,12 +212,15 @@ export interface ConventionBasedComponentDecorator {
   (template: string, style: string, options?: ComponentOptions): ConventionalComponentDecorator;
 }
 
-export declare type InjectableClassDecorator = <TFunction extends new (x, ...args) => any>(target: TFunction) => TFunction | void;
+export type InjectableClassDecorator = <TFunction extends new (x, ...args) => any>(target: TFunction) => TFunction | void;
 
-export declare type Manifest = { new (...args), name: string };
+/**
+ * An alias for a Function with a [[Construct]] internal slot.
+ */
+export type Manifest = { new (...args), name: string };
 /**
  * A convenience function which creates a new EventEmitter which emits events of the specified type.
- * ```typescriptm
+ * ```typescript
  * @output propertyChange = emitter<{ name; value }>();
  * ```
  */
