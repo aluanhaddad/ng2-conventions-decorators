@@ -4,6 +4,7 @@
 [![npm](https://img.shields.io/npm/v/ng2-conventions-decorators.svg)](ng2-conventions-decorators)
 [![npm](https://img.shields.io/npm/l/ng2-conventions-decorators.svg)](aluanhaddad/ng2-conventions-decorators)
 [![npm](https://img.shields.io/npm/dt/ng2-conventions-decorators.svg)](aluanhaddad/ng2-conventions-decorators)
+
 A set of minimal decorators for Angular2 that leverage established conventions to reduce boilerplate, enforce consistent APIs, and leverage static type analysis.
 
 # Rationale
