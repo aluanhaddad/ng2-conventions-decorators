@@ -1,4 +1,7 @@
 # ng2-conventions-decorators
+
+[![npm version](https://badge.fury.io/js/ng2-conventions-decorators.svg)](https://badge.fury.io/js/ng2-conventions-decorators)
+
 A set of minimal decorators for Angular2 that leverage established conventions to reduce boilerplate, enforce consistent APIs, and leverage static type analysis.
 
 # Rationale
