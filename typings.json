@@ -1,9 +1,0 @@
-{
-  "globalDevDependencies": {
-    "reflect-metadata": "registry:dt/reflect-metadata#0.0.0+20160630155503",
-    "tape": "registry:dt/tape#4.2.2+20160317120654"
-  },
-  "globalDependencies": {
-    "zone.js": "registry:dt/zone.js#0.0.0+20160316155526"
-  }
-}

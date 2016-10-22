@@ -36,6 +36,7 @@ test('@directive exports as the camelCased class name excluding the "Directive" 
   const {annotations: [{selector, exportAs}]} = extractMetadata(AutoSlideDirective);
 
   equal(exportAs, 'autoSlide');
+  equal(selector, '[autoSlide]');
 
   end();
 });
@@ -48,13 +49,7 @@ test('@directive exports as the camelCased class name if "Directive" suffix is n
   const {annotations: [{selector, exportAs}]} = extractMetadata(AutoSlide);
 
   equal(exportAs, 'autoSlide');
+  equal(selector, '[autoSlide]');
 
-  end();
-});
-
-test('@directive throws if no input decorated property matching the selector is part defined on the class prototype', ({throws, end}) => {
-  throws(() => {
-    @directive class AutoSlideDirective { }
-  }, /.*/);
   end();
 });

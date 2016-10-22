@@ -48,7 +48,8 @@ export declare const output: <T>(target: T, propertyKey: string) => any;
  * ```
  * is a type error because MyService does not have any dependencies.
  */
-export declare const injectable: InjectableClassDecorator;
+export declare const injectable: InjectionDecorator;
+
 /**
  * Simple Pipe decorator, enhances type safety.
  * The resulting pipe is pure.
@@ -65,8 +66,8 @@ export declare const injectable: InjectableClassDecorator;
  * is a type error because transform is required.
  */
 export declare const pipe: <T extends {
-    new (...args: any[]): PipeTransform;
-    name: string;
+  new (...args: any[]): PipeTransform;
+  name: string;
 }>(target: T) => T;
 /**
  * A convention based component decorator that creates a kebab-cased-element selector and enforces required parameters.
@@ -97,39 +98,35 @@ export declare const component: ConventionBasedComponentDecorator;
 /**
  * A convention based directive decorator that creates a Directive with an automatically, bracketed, camelCased `[myEnhancement]`
  * and is exported as `myEnhancement` for a class.
- * @param target the Directive class
- *
- * TODO: In the future, the `property` with name selector check should be done at compile time if possible.
- * This may be possible with the TypeScript 2.1.0's forthcoming `keysOf` operator.
+ * @param target the Directive class.
  */
 export declare const directive: <T extends Manifest>(target: T) => T;
 export { PipeTransform };
 export interface ComponentOptions {
-    properties?: string[];
-    host?: {
-        [key: string]: string;
-    };
-    providers?: Provider[];
-    exportAs?: string;
-    moduleId?: string;
-    queries?: {
-        [key: string]: any;
-    };
-    viewProviders?: Provider[];
-    changeDetection?: ChangeDetectionStrategy;
-    animations?: AnimationEntryMetadata[];
-    encapsulation?: ViewEncapsulation;
-    interpolation?: [string, string];
-    entryComponents?: (Function | any[])[];
+  host?: {
+    [key: string]: string;
+  };
+  providers?: Provider[];
+  viewProviders?: Provider[];
+  exportAs?: string;
+  moduleId?: string;
+  queries?: {
+    [key: string]: any;
+  };
+  changeDetection?: ChangeDetectionStrategy;
+  animations?: AnimationEntryMetadata[];
+  encapsulation?: ViewEncapsulation;
+  interpolation?: [string, string];
+  entryComponents?: (Function | any[])[];
 }
 /**
  * The type of a decorator returned by the an invocation `component` decorator factory.
  */
 export interface ConventionalComponentDecorator {
-    /**
-     * @parm target The class to decorate.
-     */
-    <T extends Manifest>(target: T): any;
+  /**
+   * @parm target The class to decorate.
+   */
+  <T extends Manifest>(target: T): any;
 }
 /**
  * A convention based component decorator that creates a kebab-cased-element selector and enforces required parameters.
@@ -153,25 +150,31 @@ export interface ConventionalComponentDecorator {
  * ```
  */
 export interface ConventionBasedComponentDecorator {
-    /**
-     * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
-     * @param options additional component options.
-     */
-    (template: string, options?: ComponentOptions): ConventionalComponentDecorator;
-    /**
-     * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
-     * @param style The style string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
-     * @param options additional component options.
-     */
-    (template: string, style: string, options?: ComponentOptions): ConventionalComponentDecorator;
+  /**
+   * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+   * @param options additional component options.
+   */
+  (template: string, options?: ComponentOptions): ConventionalComponentDecorator;
+  /**
+   * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+   * @param style The style string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+   * @param options additional component options.
+   */
+  (template: string, style: string, options?: ComponentOptions): ConventionalComponentDecorator;
 }
-export declare type InjectableClassDecorator = <TFunction extends new (x, ...args) => any>(target: TFunction) => TFunction | void;
+/**
+ * Simple dependency injection decorator with stronger type validation.
+ */
+export interface InjectionDecorator {
+  /** @param target The class to decorate.*/
+  <TFunction extends new (x, ...args) => any>(target: TFunction): TFunction | void;
+}
 /**
  * An alias for a Function with a [[Construct]] internal slot.
  */
 export declare type Manifest = {
-    new (...args);
-    name: string;
+  new (...args);
+  name: string;
 };
 /**
  * A convenience function which creates a new EventEmitter which emits events of the specified type.
@@ -179,4 +182,6 @@ export declare type Manifest = {
  * @output propertyChange = emitter<{ name; value }>();
  * ```
  */
-export declare function emitter<TEvent>(): EventEmitter<TEvent>;
+export declare const emitter: {
+  readonly sync: <T>() => EventEmitter<T>;
+} & (<T>() => EventEmitter<T>);

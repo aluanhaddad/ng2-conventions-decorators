@@ -51,6 +51,10 @@ exports.output = function (target, propertyKey) { return core_1.Output()(target,
  */
 exports.injectable = function (target) { return core_1.Injectable()(target); };
 /**
+ * @link {injectable} injectable
+ */
+exports.provide = exports.injectable;
+/**
  * Simple Pipe decorator, enhances type safety.
  * The resulting pipe is pure.
  * Automatically uses style guide convention deriving pipe name from class name.
@@ -97,30 +101,21 @@ exports.pipe = function (target) {
  */
 exports.component = function (template, styleOrOptions, options) {
     return function (target) {
-        var selector = kebabCase(target.name, 'Component');
-        var styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
-        var componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions ||
-            typeof styleOrOptions === 'string' && options || {});
-        componentOptions.styles = styles;
+        var componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions || typeof styleOrOptions === 'string' && options || {});
+        componentOptions.selector = kebabCase(target.name, 'Component');
+        componentOptions.styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
         componentOptions.template = template;
-        componentOptions.selector = selector;
         return core_1.Component(componentOptions)(target);
     };
 };
 /**
  * A convention based directive decorator that creates a Directive with an automatically, bracketed, camelCased `[myEnhancement]`
  * and is exported as `myEnhancement` for a class.
- * @param target the Directive class
- *
- * TODO: In the future, the `property` with name selector check should be done at compile time if possible.
- * This may be possible with the TypeScript 2.1.0's forthcoming `keysOf` operator.
+ * @param target the Directive class.
  */
 exports.directive = function (target) {
     var camelCaseName = camelCase(target.name);
     var selector = "[" + camelCaseName + "]";
-    if (!Reflect.getOwnMetadata('propMetadata', target)[camelCaseName]) {
-        throw TypeError("no @Input property with key " + camelCaseName + " required by " + selector + ", specified");
-    }
     return core_1.Directive({ selector: selector, exportAs: camelCaseName })(target);
 };
 /**
@@ -129,12 +124,22 @@ exports.directive = function (target) {
  * @output propertyChange = emitter<{ name; value }>();
  * ```
  */
-function emitter() {
-    return new core_1.EventEmitter();
+exports.emitter = (function () { return new core_1.EventEmitter(); });
+Object.defineProperties(exports.emitter, {
+    sync: {
+        value: function () { return new core_1.EventEmitter(false); }
+    }
+});
+var stripSuffix = function (suffix) { return function (value) {
+    var location = value.lastIndexOf(suffix);
+    return location > 0 ? value.substr(0, value.length - suffix.length) : value;
+}; };
+function camelCase(identifier) {
+    var selector = stripSuffix('Directive')(identifier.substr(1));
+    return "" + identifier[0].toLowerCase() + selector;
 }
-exports.emitter = emitter;
 function kebabCase(identifier, suffixToStrip) {
-    var name = suffixToStrip ? stripSuffix(identifier, suffixToStrip) : identifier;
+    var name = suffixToStrip ? stripSuffix(suffixToStrip)(identifier) : identifier;
     var nameSegments = name.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
     if (nameSegments.length > 1 && suffixToStrip && nameSegments.indexOf(suffixToStrip) === nameSegments.length - 1) {
         nameSegments.pop();
@@ -142,13 +147,5 @@ function kebabCase(identifier, suffixToStrip) {
     return nameSegments
         .map(function (segment) { return segment.toLowerCase(); })
         .join('-');
-}
-function camelCase(identifier) {
-    var selector = stripSuffix(identifier.substr(1), 'Directive');
-    return "" + identifier[0].toLowerCase() + selector;
-}
-function stripSuffix(value, suffix) {
-    var location = value.lastIndexOf(suffix);
-    return location > 0 ? value.substr(0, value.length - suffix.length) : value;
 }
 //# sourceMappingURL=index.js.map

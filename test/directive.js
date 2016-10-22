@@ -71,6 +71,7 @@ test('@directive exports as the camelCased class name excluding the "Directive" 
     ], AutoSlideDirective);
     var _b = extract_metadata_1.default(AutoSlideDirective).annotations[0], selector = _b.selector, exportAs = _b.exportAs;
     equal(exportAs, 'autoSlide');
+    equal(selector, '[autoSlide]');
     end();
 });
 test('@directive exports as the camelCased class name if "Directive" suffix is not present in class name', function (_a) {
@@ -91,21 +92,7 @@ test('@directive exports as the camelCased class name if "Directive" suffix is n
     ], AutoSlide);
     var _b = extract_metadata_1.default(AutoSlide).annotations[0], selector = _b.selector, exportAs = _b.exportAs;
     equal(exportAs, 'autoSlide');
-    end();
-});
-test('@directive throws if no input decorated property matching the selector is part defined on the class prototype', function (_a) {
-    var throws = _a.throws, end = _a.end;
-    throws(function () {
-        var AutoSlideDirective = (function () {
-            function AutoSlideDirective() {
-            }
-            return AutoSlideDirective;
-        }());
-        AutoSlideDirective = __decorate([
-            index_1.directive,
-            __metadata("design:paramtypes", [])
-        ], AutoSlideDirective);
-    }, /.*/);
+    equal(selector, '[autoSlide]');
     end();
 });
 //# sourceMappingURL=directive.js.map
