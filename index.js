@@ -51,10 +51,6 @@ exports.output = function (target, propertyKey) { return core_1.Output()(target,
  */
 exports.injectable = function (target) { return core_1.Injectable()(target); };
 /**
- * @link {injectable} injectable
- */
-exports.provide = exports.injectable;
-/**
  * Simple Pipe decorator, enhances type safety.
  * The resulting pipe is pure.
  * Automatically uses style guide convention deriving pipe name from class name.

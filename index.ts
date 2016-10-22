@@ -65,10 +65,6 @@ export const output = <T>(target: T, propertyKey: string) => Output()(target, pr
  * is a type error because MyService does not have any dependencies.
  */
 export const injectable: InjectionDecorator = <TFunction extends new (x, ...args) => any>(target: TFunction) => Injectable()(target);
-/**
- * @link {injectable} injectable
- */
-export const provide = injectable;
 
 /**
  * Simple Pipe decorator, enhances type safety.
