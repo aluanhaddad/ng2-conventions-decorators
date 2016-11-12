@@ -1,7 +1,7 @@
 # ng2-conventions-decorators
 
 [![GitHub release](https://img.shields.io/github/release/aluanhaddad/ng2-conventions-decorators.svg)](https://github.com/aluanhaddad/ng2-conventions-decorators/releases/latest)
-[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/ng2-conventions-decorators)
+[![npm](https://img.shields.io/npm/v/ng2-conventions-decorators.svg)](https://www.npmjs.com/package/ng2-conventions-decorators)
 [![npm](https://img.shields.io/npm/l/ng2-conventions-decorators.svg)](https://github.com/aluanhaddad/ng2-conventions-decorators/blob/master/LICENSE)
 [![npm](https://img.shields.io/npm/dt/ng2-conventions-decorators.svg)](https://www.npmjs.com/package/ng2-conventions-decorators)
 
