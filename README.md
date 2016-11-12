@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/v/ng2-conventions-decorators.svg)](https://www.npmjs.com/package/ng2-conventions-decorators)
 [![npm](https://img.shields.io/npm/l/ng2-conventions-decorators.svg)](https://github.com/aluanhaddad/ng2-conventions-decorators/blob/master/LICENSE)
 [![npm](https://img.shields.io/npm/dt/ng2-conventions-decorators.svg)](https://www.npmjs.com/package/ng2-conventions-decorators)
-
+[![Build Status](https://travis-ci.org/aluanhaddad/aurelia-types-installer.svg?branch=master)](https://travis-ci.org/aluanhaddad/aurelia-types-installer)
 A set of minimal decorators for Angular2 that leverage established conventions to reduce boilerplate, enforce consistent APIs, and leverage static type analysis.
 
 # Rationale
