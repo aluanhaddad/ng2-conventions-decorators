@@ -5,7 +5,6 @@
   "main": "index",
   "typings": "index.d.ts",
   "scripts": {
-    "preinstall": "npm install --only=peer",
     "test": "npm run build && Node test/index",
     "start": "tsc -w -p tsconfig.json",
     "build": "tsc -p tsconfig.json",
