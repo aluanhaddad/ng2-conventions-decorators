@@ -49,7 +49,6 @@ export declare const output: <T>(target: T, propertyKey: string) => any;
  * is a type error because MyService does not have any dependencies.
  */
 export declare const injectable: InjectionDecorator;
-
 /**
  * Simple Pipe decorator, enhances type safety.
  * The resulting pipe is pure.
