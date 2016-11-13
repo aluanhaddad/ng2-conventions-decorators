@@ -5,6 +5,7 @@ node_js:
   - "5.11"
 before_script: 
   - npm install
-  - npm install @angular/core rxjs zone.js
+  - npm install
+  - npm install @angular/core --peer
   - npm test
 
