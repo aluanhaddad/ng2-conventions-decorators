@@ -8,9 +8,10 @@
     "test": "npm run build && Node test/index",
     "start": "tsc -w -p tsconfig.json",
     "build": "tsc -p tsconfig.json",
+    "prebuild": "npm i --peer",
     "prepublish": "npm build && npm test"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@angular/core": "*",
     "rxjs": "*",
     "zone.js": "*"
