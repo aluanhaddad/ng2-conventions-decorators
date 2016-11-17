@@ -4,8 +4,8 @@ node_js:
   - "6.1"
   - "5.11"
 before_script: 
+  - npm install --peer
+  - npm install --dev
   - npm install
-  - npm install
-  - npm install @angular/core --peer
-  - npm test
+  
 
