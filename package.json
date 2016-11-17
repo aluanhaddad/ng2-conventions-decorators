@@ -5,9 +5,9 @@
   "main": "index",
   "typings": "index.d.ts",
   "scripts": {
-    "test": "npm run build && Node test/index",
+    "test": "npm install --peer && npm run build && Node test/index",
     "start": "tsc -w -p tsconfig.json",
-    "build": "npm install && npm install --peer && tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
     "prepublish": "npm build && npm test"
   },
   "peerDependencies": {
