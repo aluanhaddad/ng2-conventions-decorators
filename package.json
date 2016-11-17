@@ -7,13 +7,13 @@
   "scripts": {
     "test": "npm run build && Node test/index",
     "start": "tsc -w -p tsconfig.json",
-    "build": "npm install --peer && tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
     "prepublish": "npm build && npm test"
   },
-  "peerDependencies": {
-    "@angular/core": "^2.0.1",
-    "rxjs": "^5.0.0-beta.12",
-    "zone.js": "^0.6.25"
+  "dependencies": {
+    "@angular/core": "*",
+    "rxjs": "*",
+    "zone.js": "*"
   },
   "devDependencies": {
     "@types/systemjs": "^0.19.31",
