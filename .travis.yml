@@ -1,9 +1,7 @@
 language: node_js
 node_js:
   - "6"
-  - "6.1"
-  - "5.11"
-before_script: 
+before_script: test
   - npm install --peer
   - npm install --dev
   - npm install
