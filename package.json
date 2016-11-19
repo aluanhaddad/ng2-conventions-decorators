@@ -5,7 +5,7 @@
   "main": "index",
   "typings": "index.d.ts",
   "scripts": {
-    "test": "npm run build && npm run test/index",
+    "test": "npm run build && tape  test/index.js",
     "start": "tsc -w -p tsconfig.json",
     "build": "tsc -p tsconfig.json",
     "prepublish": "npm run build && npm run test"
