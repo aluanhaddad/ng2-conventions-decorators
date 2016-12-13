@@ -261,6 +261,11 @@ function createClassesWithGettersAndSettersWithDecoratorOnSet() {
         });
         return Conventional;
     }());
+    __decorate([
+        index_1.input,
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], Conventional.prototype, "dateAndTime", null);
     ;
     var Standard = (function () {
         function Standard() {
@@ -277,6 +282,11 @@ function createClassesWithGettersAndSettersWithDecoratorOnSet() {
         });
         return Standard;
     }());
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], Standard.prototype, "dateAndTime", null);
     ;
     return { Conventional: Conventional, Standard: Standard };
 }
