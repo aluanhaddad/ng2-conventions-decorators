@@ -7,18 +7,18 @@
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
 import {
-    Input,
-    Output,
-    EventEmitter,
-    Injectable,
-    Component,
-    Directive,
-    Pipe,
-    Provider,
-    PipeTransform,
-    ChangeDetectionStrategy,
-    AnimationEntryMetadata,
-    ViewEncapsulation
+  Input,
+  Output,
+  EventEmitter,
+  Injectable,
+  Component,
+  Directive,
+  Pipe,
+  Provider,
+  PipeTransform,
+  ChangeDetectionStrategy,
+  AnimationEntryMetadata,
+  ViewEncapsulation
 } from '@angular/core';
 
 /**
@@ -82,9 +82,9 @@ export const injectable: InjectionDecorator = <TFunction extends new (x, ...args
  * is a type error because transform is required.
  */
 export const pipe = <T extends { name: string; new (...args): PipeTransform }>(target: T) => {
-    const pascalName = target.name.split('Pipe')[0];
-    const canonicalName = pascalName[0].toLowerCase() + pascalName.substr(1);
-    return Pipe({ name: canonicalName })(target);
+  const pascalName = target.name.split('Pipe')[0];
+  const canonicalName = pascalName[0].toLowerCase() + pascalName.substr(1);
+  return Pipe({ name: canonicalName })(target);
 };
 
 /**
@@ -113,15 +113,15 @@ export const pipe = <T extends { name: string; new (...args): PipeTransform }>(t
  * ```
  */
 export const component: ConventionBasedComponentDecorator = (template: string, styleOrOptions?: string | ComponentOptions, options?: ComponentOptions) => {
-    return <T extends Manifest>(target: T) => {
+  return <T extends Manifest>(target: T) => {
 
-        const componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions || typeof styleOrOptions === 'string' && options || {}) as ComponentOptions & { template: string, styles: string[], selector: string };
+    const componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions || typeof styleOrOptions === 'string' && options || {}) as ComponentOptions & { template: string, styles: string[], selector: string };
 
-        componentOptions.selector = kebabCase(target.name, 'Component');
-        componentOptions.styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
-        componentOptions.template = template;
-        return Component(componentOptions)(target);
-    };
+    componentOptions.selector = kebabCase(target.name, 'Component');
+    componentOptions.styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
+    componentOptions.template = template;
+    return Component(componentOptions)(target);
+  };
 };
 /**
  * A convention based directive decorator that creates a Directive with an automatically, bracketed, camelCased `[myEnhancement]`
@@ -129,39 +129,39 @@ export const component: ConventionBasedComponentDecorator = (template: string, s
  * @param target the Directive class.
  */
 export const directive = <T extends Manifest>(target: T) => {
-    const camelCaseName = camelCase(target.name);
-    const selector = `[${camelCaseName}]`;
-    return Directive({ selector, exportAs: camelCaseName })(target);
+  const camelCaseName = camelCase(target.name);
+  const selector = `[${camelCaseName}]`;
+  return Directive({ selector, exportAs: camelCaseName })(target);
 };
 
 export { PipeTransform }
 
 export interface ComponentOptions {
-    host?: {
-        [key: string]: string;
-    };
-    providers?: Provider[];
-    viewProviders?: Provider[];
-    exportAs?: string;
-    moduleId?: string;
-    queries?: {
-        [key: string]: any;
-    };
-    changeDetection?: ChangeDetectionStrategy;
-    animations?: AnimationEntryMetadata[];
-    encapsulation?: ViewEncapsulation;
-    interpolation?: [string, string];
-    entryComponents?: (Function | any[])[];
+  host?: {
+    [key: string]: string;
+  };
+  providers?: Provider[];
+  viewProviders?: Provider[];
+  exportAs?: string;
+  moduleId?: string;
+  queries?: {
+    [key: string]: any;
+  };
+  changeDetection?: ChangeDetectionStrategy;
+  animations?: AnimationEntryMetadata[];
+  encapsulation?: ViewEncapsulation;
+  interpolation?: [string, string];
+  entryComponents?: (Function | any[])[];
 }
 
 /**
  * The type of a decorator returned by the an invocation `component` decorator factory.
  */
 export interface ConventionalComponentDecorator {
-    /**
-     * @parm target The class to decorate.
-     */
-    <T extends Manifest>(target: T);
+  /**
+   * @parm target The class to decorate.
+   */
+  <T extends Manifest>(target: T);
 }
 
 /**
@@ -186,24 +186,24 @@ export interface ConventionalComponentDecorator {
  * ```
  */
 export interface ConventionBasedComponentDecorator {
-    /**
-     * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
-     * @param options additional component options.
-     */
-    (template: string, options?: ComponentOptions): ConventionalComponentDecorator;
-    /**
-     * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
-     * @param style The style string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
-     * @param options additional component options.
-     */
-    (template: string, style: string, options?: ComponentOptions): ConventionalComponentDecorator;
+  /**
+   * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+   * @param options additional component options.
+   */
+  (template: string, options?: ComponentOptions): ConventionalComponentDecorator;
+  /**
+   * @param template The template string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+   * @param style The style string. Typically this would imported via a loader or bundler such as SystemJS or Webpack.
+   * @param options additional component options.
+   */
+  (template: string, style: string, options?: ComponentOptions): ConventionalComponentDecorator;
 }
 /**
  * Simple dependency injection decorator with stronger type validation.
  */
 export interface InjectionDecorator {
-    /** @param target The class to decorate.*/
-    <TFunction extends new (x, ...args) => any>(target: TFunction): TFunction | void;
+  /** @param target The class to decorate.*/
+  <TFunction extends new (x, ...args) => any>(target: TFunction): TFunction | void;
 }
 
 /**
@@ -217,31 +217,32 @@ export type Manifest = { new (...args), name: string };
  * ```
  */
 export const emitter = (<T>() => new EventEmitter<T>()) as {
-    readonly sync: <T>() => EventEmitter<T>
+  readonly sync: <T>() => EventEmitter<T>
 } & (<T>() => EventEmitter<T>);
 Object.defineProperties(emitter, {
-    sync: {
-        value: <T>() => new EventEmitter<T>(false)
-    }
+  sync: {
+    value: <T>() => new EventEmitter<T>(false)
+  }
 });
 
 const stripSuffix = (suffix: string) => (value: string) => {
-    const location = value.lastIndexOf(suffix);
-    return location > 0 ? value.substr(0, value.length - suffix.length) : value;
+  const location = value.lastIndexOf(suffix);
+  return location > 0 ? value.substr(0, value.length - suffix.length) : value;
 };
 
 function camelCase(identifier: string): string {
-    const selector = stripSuffix('Directive')(identifier.substr(1));
-    return `${identifier[0].toLowerCase()}${selector}`;
+  const selector = stripSuffix('Directive')(identifier.substr(1));
+  return `${identifier[0].toLowerCase()}${selector}`;
 }
 
 function kebabCase(identifier: string, suffixToStrip?: string): string {
-    const name = suffixToStrip ? stripSuffix(suffixToStrip)(identifier) : identifier;
-    const nameSegments = name.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
-    if (nameSegments.length > 1 && suffixToStrip && nameSegments.indexOf(suffixToStrip) === nameSegments.length - 1) {
-        nameSegments.pop();
-    }
-    return nameSegments
-        .map(segment => segment.toLowerCase())
-        .join('-');
+  const name = suffixToStrip ? stripSuffix(suffixToStrip)(identifier) : identifier;
+  const nameSegments = name.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
+  if (nameSegments.length > 1 && suffixToStrip && nameSegments.indexOf(suffixToStrip) === nameSegments.length - 1) {
+    nameSegments.pop();
+  }
+  return nameSegments
+    .map(segment => segment.toLowerCase())
+    .join('-');
 }
+
