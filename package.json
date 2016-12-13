@@ -16,11 +16,11 @@
     "zone.js": "^0.6.25"
   },
   "devDependencies": {
-    "@types/systemjs": "^0.19.31",
-    "@types/tape": "^4.2.27",
+    "@types/systemjs": "^0.19.32",
+    "@types/tape": "^4.2.28",
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.8",
-    "systemjs": "^0.19.39",
+    "systemjs": "^0.19.41",
     "tape": "latest",
     "tslint": "next",
     "typescript": "next"
