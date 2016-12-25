@@ -33,11 +33,26 @@ This is just one of many examples but it clearly demonstrates the following issu
 1. Hard to teach: Recommended practices are now optional, but still expected, just optional. Angular 2 is opinionated, so there is no argument for flexibility or agnosticism.
 1. Harder to maintain: To know the tag name you need to use in html you have to read every component's definition or documentation.
 
+Angular 2's AOT compilation process fails when a component contains `private` properties that are used in its markup. While this probably should not be the case at all
+it should at least be documented and enforced so that JIT mode and AOT mode have the same semantics and behavior. The included `component` decorator factory enforces this at the type level,
+providing an error when a component contains a `private` or `protected` property. This correctly gives you a static error in both JIT and AOT by communicating the intent missing from Angular 2's APIs.
+
+```TypeScript
+@component(template) export class MyAwesomeComponent {
+    prop = 'this is public';
+} // OK
+```
+
+```TypeScript
+@component(template) export class MyAwesomeComponent {
+    private prop = 'this is private';
+} // Static Error
+```
 
 -----
 # Installation
 _jspm_
-```powershell 
+```powershell
 jspm i ng2-conventions-decorators
 ```
 _npm_

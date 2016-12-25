@@ -33,7 +33,9 @@
     "no-duplicate-variable": true,
     "no-empty": true,
     "no-eval": true,
-    "no-inferrable-types": true,
+    "no-inferrable-types": [
+      true
+    ],
     "no-internal-module": true,
     "no-string-literal": true,
     "no-switch-case-fall-through": true,

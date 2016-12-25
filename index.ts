@@ -113,7 +113,9 @@ export const pipe = <T extends { name: string; new (...args): PipeTransform }>(t
  * ```
  */
 export const component: ConventionBasedComponentDecorator = (template: string, styleOrOptions?: string | ComponentOptions, options?: ComponentOptions) => {
-  return <T extends Manifest>(target: T) => {
+  return <T extends Manifest, Instance>(target: T & (new (...args: any[]) => {
+    [P in keyof Instance]: Instance[P]
+  })) => {
 
     const componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions || typeof styleOrOptions === 'string' && options || {}) as ComponentOptions & { template: string, styles: string[], selector: string };
 
@@ -161,7 +163,9 @@ export interface ConventionalComponentDecorator {
   /**
    * @parm target The class to decorate.
    */
-  <T extends Manifest>(target: T);
+  <T extends Manifest, Instance>(target: T & (new (...args: any[]) => {
+    [P in keyof Instance]: Instance[P]
+  }));
 }
 
 /**

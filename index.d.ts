@@ -125,7 +125,9 @@ export interface ConventionalComponentDecorator {
   /**
    * @parm target The class to decorate.
    */
-  <T extends Manifest>(target: T): any;
+  <T extends Manifest, Instance>(target: T & (new (...args: any[]) => {
+    [P in keyof Instance]: Instance[P];
+  })): any;
 }
 /**
  * A convention based component decorator that creates a kebab-cased-element selector and enforces required parameters.
@@ -184,4 +186,3 @@ export declare type Manifest = {
 export declare const emitter: {
   readonly sync: <T>() => EventEmitter<T>;
 } & (<T>() => EventEmitter<T>);
-
