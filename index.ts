@@ -64,7 +64,7 @@ export const output = <T>(target: T, propertyKey: string) => Output()(target, pr
  * ```
  * is a type error because MyService does not have any dependencies.
  */
-export const injectable: InjectionDecorator = <TFunction extends new (x, ...args) => any>(target: TFunction) => Injectable()(target);
+export const injectable: InjectionDecorator = <TFunction extends new (x: any, ...args: any[]) => any>(target: TFunction) => Injectable()(target);
 
 /**
  * Simple Pipe decorator, enhances type safety.
@@ -81,7 +81,7 @@ export const injectable: InjectionDecorator = <TFunction extends new (x, ...args
  * ```
  * is a type error because transform is required.
  */
-export const pipe = <T extends { name: string; new (...args): PipeTransform }>(target: T) => {
+export const pipe = <T extends { name: string; new (...args: any[]): PipeTransform }>(target: T) => {
   const pascalName = target.name.split('Pipe')[0];
   const canonicalName = pascalName[0].toLowerCase() + pascalName.substr(1);
   return Pipe({ name: canonicalName })(target);
@@ -165,7 +165,7 @@ export interface ConventionalComponentDecorator {
    */
   <T extends Manifest, Instance>(target: T & (new (...args: any[]) => {
     [P in keyof Instance]: Instance[P]
-  }));
+  })): T;
 }
 
 /**
@@ -207,13 +207,13 @@ export interface ConventionBasedComponentDecorator {
  */
 export interface InjectionDecorator {
   /** @param target The class to decorate.*/
-  <TFunction extends new (x, ...args) => any>(target: TFunction): TFunction | void;
+  <TFunction extends new (x: any, ...args: any[]) => any>(target: TFunction): TFunction | void;
 }
 
 /**
  * An alias for a Function with a [[Construct]] internal slot.
  */
-export type Manifest = { new (...args), name: string };
+export type Manifest = { new (...args: any[]): any, name: string };
 /**
  * A convenience function which creates a new EventEmitter which emits events of the specified type.
  * ```typescript

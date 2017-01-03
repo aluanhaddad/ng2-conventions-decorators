@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @module
  * @description
@@ -7,7 +6,7 @@
  * They enforce, by convention, naming guidelines for _Components_, _Input_ and _Output_ properties, and _Pipes_.
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
-var core_1 = require("@angular/core");
+import { Input, Output, EventEmitter, Injectable, Component, Directive, Pipe } from '@angular/core';
 /**
  * Simple Input decorator for common case where the property is not aliased.
  * ```typescript
@@ -18,7 +17,7 @@ var core_1 = require("@angular/core");
  * @Input() binding = 1;
  * ```
  */
-exports.input = function (target, propertyKey) { return core_1.Input()(target, propertyKey); };
+export var input = function (target, propertyKey) { return Input()(target, propertyKey); };
 /**
  * Simple Output decorator for common case where the property is not aliased.
  * ```typescript
@@ -29,7 +28,7 @@ exports.input = function (target, propertyKey) { return core_1.Input()(target, p
  * @Output() onChange = new EventEmitter<number>();
  * ```
  */
-exports.output = function (target, propertyKey) { return core_1.Output()(target, propertyKey); };
+export var output = function (target, propertyKey) { return Output()(target, propertyKey); };
 /**
  * Simple dependency injection decorator with stronger type validation.
  * ```typescript
@@ -49,7 +48,7 @@ exports.output = function (target, propertyKey) { return core_1.Output()(target,
  * ```
  * is a type error because MyService does not have any dependencies.
  */
-exports.injectable = function (target) { return core_1.Injectable()(target); };
+export var injectable = function (target) { return Injectable()(target); };
 /**
  * Simple Pipe decorator, enhances type safety.
  * The resulting pipe is pure.
@@ -65,10 +64,10 @@ exports.injectable = function (target) { return core_1.Injectable()(target); };
  * ```
  * is a type error because transform is required.
  */
-exports.pipe = function (target) {
+export var pipe = function (target) {
     var pascalName = target.name.split('Pipe')[0];
     var canonicalName = pascalName[0].toLowerCase() + pascalName.substr(1);
-    return core_1.Pipe({ name: canonicalName })(target);
+    return Pipe({ name: canonicalName })(target);
 };
 /**
  * A convention based component decorator that creates a kebab-cased-element selector and enforces required parameters.
@@ -95,13 +94,13 @@ exports.pipe = function (target) {
  * }) export class SomeCustomElementComponent { ... }
  * ```
  */
-exports.component = function (template, styleOrOptions, options) {
+export var component = function (template, styleOrOptions, options) {
     return function (target) {
         var componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions || typeof styleOrOptions === 'string' && options || {});
         componentOptions.selector = kebabCase(target.name, 'Component');
         componentOptions.styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
         componentOptions.template = template;
-        return core_1.Component(componentOptions)(target);
+        return Component(componentOptions)(target);
     };
 };
 /**
@@ -109,10 +108,10 @@ exports.component = function (template, styleOrOptions, options) {
  * and is exported as `myEnhancement` for a class.
  * @param target the Directive class.
  */
-exports.directive = function (target) {
+export var directive = function (target) {
     var camelCaseName = camelCase(target.name);
     var selector = "[" + camelCaseName + "]";
-    return core_1.Directive({ selector: selector, exportAs: camelCaseName })(target);
+    return Directive({ selector: selector, exportAs: camelCaseName })(target);
 };
 /**
  * A convenience function which creates a new EventEmitter which emits events of the specified type.
@@ -120,10 +119,10 @@ exports.directive = function (target) {
  * @output propertyChange = emitter<{ name; value }>();
  * ```
  */
-exports.emitter = (function () { return new core_1.EventEmitter(); });
-Object.defineProperties(exports.emitter, {
+export var emitter = (function () { return new EventEmitter(); });
+Object.defineProperties(emitter, {
     sync: {
-        value: function () { return new core_1.EventEmitter(false); }
+        value: function () { return new EventEmitter(false); }
     }
 });
 var stripSuffix = function (suffix) { return function (value) {

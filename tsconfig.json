@@ -5,6 +5,7 @@
     "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "noImplicitAny": true,
     "sourceMap": true,
     "lib": [
       "es2017",
