@@ -10,12 +10,12 @@ export function extractMetadata(Decorated: {}): extractMetadata.Metadata {
 export declare namespace extractMetadata {
   interface Data {
     annotations?: (Metadata.Annotation & {
-      [P in keyof Metadata.Annotation]?: Metadata.Annotation[P]})[];
+      [P in keyof Metadata.Annotation]: Metadata.Annotation[P]})[];
   }
   export type Metadata = {
     [P in keyof extractMetadata.Data]: Data[P]
   } & {
-      annotations?: (Metadata.Annotation & { [key: string]: {} })[];
+      annotations: (Metadata.Annotation & { [key: string]: {} })[];
     };
   export namespace Metadata {
     export interface Annotation {

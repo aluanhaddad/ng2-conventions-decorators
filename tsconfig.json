@@ -1,12 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es5",
     "module": "commonjs",
+    "target": "esnext",
+    "alwaysStrict": true,
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noEmit": true,
     "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "noImplicitAny": true,
-    "sourceMap": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "pretty": true,
+    "diagnostics": false,
+    "traceResolution": false,
+    "forceConsistentCasingInFileNames": true,
     "lib": [
       "es2017",
       "dom"

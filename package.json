@@ -1,11 +1,12 @@
 {
   "name": "ng2-conventions-decorators",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A set of minimal decorators for Angular2 that leverage established conventions to reduce boilerplate, improve maintainability, and improve type safety",
   "main": "index",
   "typings": "index.d.ts",
   "scripts": {
-    "test": "npm run build && tape  test/index.js",
+    "test": "npm run test-npm",
+    "test-npm": "ts-node node_modules/tape/bin/tape ./test/index.ts",
     "start": "tsc -w -p tsconfig.json",
     "build": "tsc -p tsconfig.json",
     "prepublish": "npm run build && npm run test"
@@ -17,13 +18,16 @@
     "typescript": ">=2.1.4"
   },
   "devDependencies": {
-    "@types/systemjs": "^0.19.32",
+    "@angular/compiler": "latest",
+    "@types/systemjs": "latest",
     "@types/tape": "^4.2.28",
     "core-js": "^2.4.1",
-    "reflect-metadata": "^0.1.8",
+    "reflect-metadata": "^0.1.9",
     "systemjs": "^0.19.41",
     "tape": "latest",
-    "tslint": "next",
+    "ts-node": "^2.0.0",
+    "tslib": "^1.4.0",
+    "tslint": "latest",
     "typescript": "next"
   },
   "repository": {
@@ -45,5 +49,8 @@
   "bugs": {
     "url": "https://github.com/aluanhaddad/ng2-conventions-decorators/issues"
   },
-  "homepage": "https://github.com/aluanhaddad/ng2-conventions-decorators#readme"
+  "homepage": "https://github.com/aluanhaddad/ng2-conventions-decorators#readme",
+  "dependencies": {
+    "tslib": "^1.4.0"
+  }
 }

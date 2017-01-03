@@ -116,26 +116,37 @@ export const component: ConventionBasedComponentDecorator = (template: string, s
   return <T extends Manifest, Instance>(target: T & (new (...args: any[]) => {
     [P in keyof Instance]: Instance[P]
   })) => {
-
-    const componentOptions = (typeof styleOrOptions !== 'string' && styleOrOptions || typeof styleOrOptions === 'string' && options || {}) as ComponentOptions & { template: string, styles: string[], selector: string };
+    ensureName(target);
+    const componentOptions = (
+      typeof styleOrOptions !== 'string' && styleOrOptions ||
+      typeof styleOrOptions === 'string' && options || {}
+    ) as ComponentOptions & {
+      template: string, styles?: string[], selector: string
+    };
 
     componentOptions.selector = kebabCase(target.name, 'Component');
-    componentOptions.styles = typeof styleOrOptions === 'string' ? [styleOrOptions] : undefined;
+    componentOptions.styles = typeof styleOrOptions === 'string' && [styleOrOptions] || undefined;
     componentOptions.template = template;
     return Component(componentOptions)(target);
   };
 };
+
 /**
  * A convention based directive decorator that creates a Directive with an automatically, bracketed, camelCased `[myEnhancement]`
  * and is exported as `myEnhancement` for a class.
  * @param target the Directive class.
  */
 export const directive = <T extends Manifest>(target: T) => {
+  ensureName(target);
   const camelCaseName = camelCase(target.name);
   const selector = `[${camelCaseName}]`;
   return Directive({ selector, exportAs: camelCaseName })(target);
 };
-
+/**
+ * @deprecated this re-export is deprecated. Import from core or avoid it altogether.
+ * The {PipeTransform} requirement is esnured by the decorator, so omiting this does not
+ * affect validation and helps to keep your code clean and dry
+ */
 export { PipeTransform }
 
 export interface ComponentOptions {
@@ -241,7 +252,7 @@ function camelCase(identifier: string): string {
 
 function kebabCase(identifier: string, suffixToStrip?: string): string {
   const name = suffixToStrip ? stripSuffix(suffixToStrip)(identifier) : identifier;
-  const nameSegments = name.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g);
+  const nameSegments = name.match(/[A-Z]{1,}[a-z]{1}[^A-Z]*/g)!;
   if (nameSegments.length > 1 && suffixToStrip && nameSegments.indexOf(suffixToStrip) === nameSegments.length - 1) {
     nameSegments.pop();
   }
@@ -250,3 +261,8 @@ function kebabCase(identifier: string, suffixToStrip?: string): string {
     .join('-');
 }
 
+function ensureName(target: { name: string }) {
+  if (!target.name) {
+    throw TypeError('Effectively anonymous functions/es2015 classes cannot be named via conventions.');
+  }
+};
