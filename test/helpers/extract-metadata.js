@@ -1,12 +1,12 @@
 "use strict";
-function default_1(Decorated) {
-    var metadataKeys = Reflect.getMetadataKeys(Decorated);
-    var metadata = metadataKeys.reduce(function (metadata, key) {
+function extractMetadata(Decorated) {
+    const metadataKeys = Reflect.getMetadataKeys(Decorated);
+    const metadata = metadataKeys.reduce((metadata, key) => {
         metadata[key] = Reflect.getMetadata(key, Decorated);
         return metadata;
     }, {});
     return metadata;
 }
+exports.extractMetadata = extractMetadata;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = default_1;
-//# sourceMappingURL=extract-metadata.js.map
+exports.default = extractMetadata;
