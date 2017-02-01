@@ -161,7 +161,7 @@ function createClassesWithGettersAndSetters() {
     tslib_1.__decorate([
         index_1.input,
         tslib_1.__metadata("design:type", Date),
-        tslib_1.__metadata("design:paramtypes", [])
+        tslib_1.__metadata("design:paramtypes", [Object])
     ], Conventional.prototype, "dateAndTime", null);
     ;
     class Standard {
@@ -175,7 +175,7 @@ function createClassesWithGettersAndSetters() {
     tslib_1.__decorate([
         core_1.Input(),
         tslib_1.__metadata("design:type", Date),
-        tslib_1.__metadata("design:paramtypes", [])
+        tslib_1.__metadata("design:paramtypes", [Object])
     ], Standard.prototype, "dateAndTime", null);
     ;
     return { Conventional, Standard };

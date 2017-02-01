@@ -8,9 +8,9 @@
  * Some additionally provide stronger type checking, catching invalid decorator use at compile time via _type constraints_.
  */
 const core_1 = require("@angular/core");
-const ensure_name_1 = require("util/ensure-name");
-const kebab_case_1 = require("util/kebab-case");
-const camel_case_1 = require("util/camel-case");
+const ensure_name_1 = require("./util/ensure-name");
+const kebab_case_1 = require("./util/kebab-case");
+const camel_case_1 = require("./util/camel-case");
 /**
  * Simple Input decorator for common case where the property is not aliased.
  * ```typescript

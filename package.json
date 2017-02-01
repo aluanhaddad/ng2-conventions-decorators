@@ -8,7 +8,7 @@
     "test": "npm run test-npm",
     "test-npm": "ts-node node_modules/tape/bin/tape ./test/index.ts",
     "start": "tsc -w -p tsconfig.json",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc || true",
     "prepublish": "npm run build && npm run test"
   },
   "peerDependencies": {
@@ -17,17 +17,18 @@
     "zone.js": "*"
   },
   "devDependencies": {
-    "typescript": "next",
     "@angular/compiler": "latest",
     "@types/systemjs": "latest",
     "@types/tape": "^4.2.28",
+    "cash-true": "0.0.2",
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.9",
     "systemjs": "^0.19.41",
     "tape": "latest",
     "ts-node": "^2.0.0",
     "tslib": "^1.4.0",
-    "tslint": "latest"
+    "tslint": "latest",
+    "typescript": "next"
   },
   "repository": {
     "type": "git",

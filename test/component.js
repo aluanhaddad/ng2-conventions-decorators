@@ -10,8 +10,7 @@ test('@component creates kebab-cased selector excluding "Component" suffix', ({ 
     let DynamicListViewComponent = class DynamicListViewComponent {
     };
     DynamicListViewComponent = tslib_1.__decorate([
-        index_1.component(template),
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.component(template)
     ], DynamicListViewComponent);
     const metadata = extract_metadata_1.default(DynamicListViewComponent);
     equal(metadata.annotations[0].selector, 'dynamic-list-view');
@@ -21,8 +20,7 @@ test('@component creates full selector if component suffix is absent from class 
     let DynamicListView = class DynamicListView {
     };
     DynamicListView = tslib_1.__decorate([
-        index_1.component(template),
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.component(template)
     ], DynamicListView);
     const metadata = extract_metadata_1.default(DynamicListView);
     equal(metadata.annotations[0].selector, 'dynamic-list-view');
@@ -32,8 +30,7 @@ test('@component propagates template to metadata when it is the sole argument', 
     let DynamicListView = class DynamicListView {
     };
     DynamicListView = tslib_1.__decorate([
-        index_1.component(template),
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.component(template)
     ], DynamicListView);
     const metadata = extract_metadata_1.default(DynamicListView);
     equal(metadata.annotations[0].template, template);
@@ -43,8 +40,7 @@ test('@component propagates template to metadata when it is the first of 2 argum
     let DynamicListView = class DynamicListView {
     };
     DynamicListView = tslib_1.__decorate([
-        index_1.component(template, {}),
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.component(template, {})
     ], DynamicListView);
     const metadata = extract_metadata_1.default(DynamicListView);
     equal(metadata.annotations[0].template, template);
@@ -56,8 +52,7 @@ test('@component propagates template to metadata when specified as the first arg
     };
     DynamicListView = tslib_1.__decorate([
         index_1.component(template, style, { providers: [class {
-                }] }),
-        tslib_1.__metadata("design:paramtypes", [])
+                }] })
     ], DynamicListView);
     const metadataKeys = Reflect.getMetadataKeys(DynamicListView);
     const metadata = metadataKeys.reduce((metadata, key) => {
@@ -72,8 +67,7 @@ test('@component propagates style to styles metadata when specified as the 2nd o
     let DynamicListView = class DynamicListView {
     };
     DynamicListView = tslib_1.__decorate([
-        index_1.component('<div></div>', style),
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.component('<div></div>', style)
     ], DynamicListView);
     const metadata = extract_metadata_1.default(DynamicListView);
     deepEqual(metadata.annotations[0].styles, [style]);
@@ -85,8 +79,7 @@ test('@component propagates style to styles metadata when specified as the 2nd o
     };
     DynamicListView = tslib_1.__decorate([
         index_1.component(template, style, { providers: [class {
-                }] }),
-        tslib_1.__metadata("design:paramtypes", [])
+                }] })
     ], DynamicListView);
     const metadata = extract_metadata_1.default(DynamicListView);
     deepEqual(metadata.annotations[0].styles, [style]);
@@ -97,8 +90,7 @@ test('@component propagates all options to metadata when options is the 2nd of 2
     let DynamicListView = class DynamicListView {
     };
     DynamicListView = tslib_1.__decorate([
-        index_1.component(template, componentOptions),
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.component(template, componentOptions)
     ], DynamicListView);
     const metadata = extract_metadata_1.default(DynamicListView);
     Object.keys(componentOptions).forEach((key) => {
@@ -115,8 +107,7 @@ test('@component propagates all options to metadata when options is the 3rd of 3
     let DynamicListView = class DynamicListView {
     };
     DynamicListView = tslib_1.__decorate([
-        index_1.component(template, style, componentOptions),
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.component(template, style, componentOptions)
     ], DynamicListView);
     const metadata = extract_metadata_1.default(DynamicListView);
     Object.keys(componentOptions).forEach((key) => {

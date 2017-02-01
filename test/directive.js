@@ -16,8 +16,7 @@ test('@directive creates square-bracketed camelCased selector excluding "Directi
         tslib_1.__metadata("design:type", Object)
     ], AutoSlideDirective.prototype, "autoSlide", void 0);
     AutoSlideDirective = tslib_1.__decorate([
-        index_1.directive,
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.directive
     ], AutoSlideDirective);
     const { annotations: [{ selector }] } = extract_metadata_1.default(AutoSlideDirective);
     equal(selector, '[autoSlide]');
@@ -34,8 +33,7 @@ test('@directive creates square-bracketed if "Directive" suffix is not present i
         tslib_1.__metadata("design:type", Object)
     ], AutoSlide.prototype, "autoSlide", void 0);
     AutoSlide = tslib_1.__decorate([
-        index_1.directive,
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.directive
     ], AutoSlide);
     const { annotations: [{ selector }] } = extract_metadata_1.default(AutoSlide);
     equal(selector, '[autoSlide]');
@@ -52,8 +50,7 @@ test('@directive exports as the camelCased class name excluding the "Directive" 
         tslib_1.__metadata("design:type", Object)
     ], AutoSlideDirective.prototype, "autoSlide", void 0);
     AutoSlideDirective = tslib_1.__decorate([
-        index_1.directive,
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.directive
     ], AutoSlideDirective);
     const { annotations: [{ selector, exportAs }] } = extract_metadata_1.default(AutoSlideDirective);
     equal(exportAs, 'autoSlide');
@@ -71,8 +68,7 @@ test('@directive exports as the camelCased class name if "Directive" suffix is n
         tslib_1.__metadata("design:type", Object)
     ], AutoSlide.prototype, "autoSlide", void 0);
     AutoSlide = tslib_1.__decorate([
-        index_1.directive,
-        tslib_1.__metadata("design:paramtypes", [])
+        index_1.directive
     ], AutoSlide);
     const { annotations: [{ selector, exportAs }] } = extract_metadata_1.default(AutoSlide);
     equal(exportAs, 'autoSlide');
