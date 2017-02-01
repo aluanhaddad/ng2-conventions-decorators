@@ -28,9 +28,9 @@ import camelCase from './util/camel-case';
 /**
  * Simple Input decorator for common case where the property is not aliased.
  * ```typescript
- * @input binding = 1; 
+ * @input binding = 1;
  * ```
- * is equivalent to 
+ * is equivalent to
  * ```typescript
  * @Input() binding = 1;
  * ```
@@ -42,7 +42,7 @@ export const input = <T>(target: T, propertyKey: string) => Input()(target, prop
  * ```typescript
  * @output onChange = new EventEmitter<number>();
  * ```
- * is equivalent to 
+ * is equivalent to
  * ```typescript
  * @Output() onChange = new EventEmitter<number>();
  * ```
@@ -52,17 +52,17 @@ export const output = <T>(target: T, propertyKey: string) => Output()(target, pr
 /**
  * Simple dependency injection decorator with stronger type validation.
  * ```typescript
- * @injectable class MyService { 
+ * @injectable class MyService {
  *     constructor(otherServe: OtherService) { }
  * }
  * ```
- * is equivalent to 
+ * is equivalent to
  * ```typescript
  * @Injectable() class MyService {
  *     constructor(otherServe: OtherService) { }
  * }
  * ```
- * Note that 
+ * Note that
  * ```typescript
  * @injectable class MyService { }
  * ```
@@ -75,13 +75,13 @@ export const injectable: InjectionDecorator = <TFunction extends new (x: any, ..
  * The resulting pipe is pure.
  * Automatically uses style guide convention deriving pipe name from class name.
  * ```typescript
- * @pipe class StandardCurrencyPipe { transform(value); } 
- * // is equivalent to 
+ * @pipe class StandardCurrencyPipe { transform(value); }
+ * // is equivalent to
  * @Pipe({ name: 'standardCurrency' }) class StandardCurrencyPipe { transform(value); }
  * ```
  * Note that
  * ```typescript
- * @pipe class StandardCurrencyPipe { } 
+ * @pipe class StandardCurrencyPipe { }
  * ```
  * is a type error because transform is required.
  */

@@ -123,7 +123,7 @@ function createPopulatedComponentOptions() {
         changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         encapsulation: core_1.ViewEncapsulation.None,
         exportAs: 'anonymous',
-        host: { 'app': 'src' },
+        host: { app: 'src' },
         interpolation: ['x', 'y'],
         moduleId: 'somewhere',
         entryComponents: [class {
