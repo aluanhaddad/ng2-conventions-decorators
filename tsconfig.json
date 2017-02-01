@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5",
+    "target": "es2015",
     "alwaysStrict": true,
     "moduleResolution": "node",
-    "strictNullChecks": true,
-    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noImplicitAny": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "noEmit": false,
