@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import test = require('tape');
 import { Directive, Input } from '@angular/core';
 import extractMetadata from './helpers/extract-metadata';
-import { directive, input } from '../index';
+import { directive, input } from '../src/index';
 
 test('@directive creates square-bracketed camelCased selector excluding "Directive" suffix', ({equal, end}) => {
   @directive class AutoSlideDirective {

@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import test = require('tape');
-import { input } from '../index';
+import { input } from '../src/index';
 import { Input } from '@angular/core';
 
 test('Class metadata must be equivalent', ({deepEqual, end}) => {

@@ -1,7 +1,7 @@
 "use strict";
 function extractMetadata(Decorated) {
-    const metadataKeys = Reflect.getMetadataKeys(Decorated);
-    const metadata = metadataKeys.reduce((metadata, key) => {
+    var metadataKeys = Reflect.getMetadataKeys(Decorated);
+    var metadata = metadataKeys.reduce(function (metadata, key) {
         metadata[key] = Reflect.getMetadata(key, Decorated);
         return metadata;
     }, {});

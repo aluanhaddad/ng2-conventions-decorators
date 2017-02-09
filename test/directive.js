@@ -1,16 +1,18 @@
 "use strict";
-const tslib_1 = require("tslib");
+var tslib_1 = require("tslib");
 require("reflect-metadata");
-const test = require("tape");
-const core_1 = require("@angular/core");
-const extract_metadata_1 = require("./helpers/extract-metadata");
-const index_1 = require("../index");
-test('@directive creates square-bracketed camelCased selector excluding "Directive" suffix', ({ equal, end }) => {
-    let AutoSlideDirective = class AutoSlideDirective {
-        constructor() {
+var test = require("tape");
+var core_1 = require("@angular/core");
+var extract_metadata_1 = require("./helpers/extract-metadata");
+var index_1 = require("../src/index");
+test('@directive creates square-bracketed camelCased selector excluding "Directive" suffix', function (_a) {
+    var equal = _a.equal, end = _a.end;
+    var AutoSlideDirective = (function () {
+        function AutoSlideDirective() {
             this.autoSlide = '';
         }
-    };
+        return AutoSlideDirective;
+    }());
     tslib_1.__decorate([
         index_1.input,
         tslib_1.__metadata("design:type", Object)
@@ -18,16 +20,18 @@ test('@directive creates square-bracketed camelCased selector excluding "Directi
     AutoSlideDirective = tslib_1.__decorate([
         index_1.directive
     ], AutoSlideDirective);
-    const { annotations: [{ selector }] } = extract_metadata_1.default(AutoSlideDirective);
+    var selector = extract_metadata_1.default(AutoSlideDirective).annotations[0].selector;
     equal(selector, '[autoSlide]');
     end();
 });
-test('@directive creates square-bracketed if "Directive" suffix is not present in class name', ({ equal, end }) => {
-    let AutoSlide = class AutoSlide {
-        constructor() {
+test('@directive creates square-bracketed if "Directive" suffix is not present in class name', function (_a) {
+    var equal = _a.equal, end = _a.end;
+    var AutoSlide = (function () {
+        function AutoSlide() {
             this.autoSlide = '';
         }
-    };
+        return AutoSlide;
+    }());
     tslib_1.__decorate([
         core_1.Input(),
         tslib_1.__metadata("design:type", Object)
@@ -35,16 +39,18 @@ test('@directive creates square-bracketed if "Directive" suffix is not present i
     AutoSlide = tslib_1.__decorate([
         index_1.directive
     ], AutoSlide);
-    const { annotations: [{ selector }] } = extract_metadata_1.default(AutoSlide);
+    var selector = extract_metadata_1.default(AutoSlide).annotations[0].selector;
     equal(selector, '[autoSlide]');
     end();
 });
-test('@directive exports as the camelCased class name excluding the "Directive" suffix', ({ equal, end }) => {
-    let AutoSlideDirective = class AutoSlideDirective {
-        constructor() {
+test('@directive exports as the camelCased class name excluding the "Directive" suffix', function (_a) {
+    var equal = _a.equal, end = _a.end;
+    var AutoSlideDirective = (function () {
+        function AutoSlideDirective() {
             this.autoSlide = '';
         }
-    };
+        return AutoSlideDirective;
+    }());
     tslib_1.__decorate([
         core_1.Input(),
         tslib_1.__metadata("design:type", Object)
@@ -52,17 +58,19 @@ test('@directive exports as the camelCased class name excluding the "Directive" 
     AutoSlideDirective = tslib_1.__decorate([
         index_1.directive
     ], AutoSlideDirective);
-    const { annotations: [{ selector, exportAs }] } = extract_metadata_1.default(AutoSlideDirective);
+    var _b = extract_metadata_1.default(AutoSlideDirective).annotations[0], selector = _b.selector, exportAs = _b.exportAs;
     equal(exportAs, 'autoSlide');
     equal(selector, '[autoSlide]');
     end();
 });
-test('@directive exports as the camelCased class name if "Directive" suffix is not present in class name', ({ equal, end }) => {
-    let AutoSlide = class AutoSlide {
-        constructor() {
+test('@directive exports as the camelCased class name if "Directive" suffix is not present in class name', function (_a) {
+    var equal = _a.equal, end = _a.end;
+    var AutoSlide = (function () {
+        function AutoSlide() {
             this.autoSlide = '';
         }
-    };
+        return AutoSlide;
+    }());
     tslib_1.__decorate([
         core_1.Input(),
         tslib_1.__metadata("design:type", Object)
@@ -70,7 +78,7 @@ test('@directive exports as the camelCased class name if "Directive" suffix is n
     AutoSlide = tslib_1.__decorate([
         index_1.directive
     ], AutoSlide);
-    const { annotations: [{ selector, exportAs }] } = extract_metadata_1.default(AutoSlide);
+    var _b = extract_metadata_1.default(AutoSlide).annotations[0], selector = _b.selector, exportAs = _b.exportAs;
     equal(exportAs, 'autoSlide');
     equal(selector, '[autoSlide]');
     end();

@@ -3,7 +3,7 @@ import test = require('tape');
 import {
   component,
   ComponentOptions
-} from '../index';
+} from '../src/index';
 import {
   AnimationEntryMetadata,
   ChangeDetectionStrategy,

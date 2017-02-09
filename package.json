@@ -7,7 +7,7 @@
   "scripts": {
     "test": "npm run test-npm",
     "test-npm": "ts-node node_modules/tape/bin/tape ./test/index.ts",
-    "start": "tsc -w -p tsconfig.json",
+    "start": "tsc --watch",
     "build": "tsc",
     "lint": "tslint --project tsconfig.json --config tslint.json --format stylish",
     "prepublish": "npm run build && npm run lint && npm test"
@@ -19,18 +19,20 @@
   },
   "devDependencies": {
     "@angular/compiler": "latest",
-    "@types/systemjs": "latest",
+    "@types/node": "^7.0.5",
+    "@types/reflect-metadata": "0.0.5",
+    "@types/systemjs": "^0.20.0",
     "@types/tape": "^4.2.28",
     "cash-true": "0.0.2",
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.9",
     "systemjs": "^0.19.41",
     "tape": "latest",
-    "ts-node": "^2.0.0",
-    "tslib": "^1.4.0",
+    "ts-node": "^2.1.0",
+    "tslib": "^1.5.0",
     "tslint": "latest",
     "tslint-stylish": "^2.1.0-beta",
-    "typescript": ">=2.2.0-dev.20170112"
+    "typescript": "next"
   },
   "repository": {
     "type": "git",
