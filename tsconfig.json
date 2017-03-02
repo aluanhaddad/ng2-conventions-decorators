@@ -18,7 +18,7 @@
     "diagnostics": false,
     "traceResolution": false,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "rootDirs": [
       "src",
       "test"

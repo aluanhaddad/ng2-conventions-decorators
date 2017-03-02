@@ -1,12 +1,12 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function extractMetadata(Decorated) {
-    const metadataKeys = Reflect.getMetadataKeys(Decorated);
-    const metadata = metadataKeys.reduce((metadata, key) => {
+    var metadataKeys = Reflect.getMetadataKeys(Decorated);
+    var metadata = metadataKeys.reduce(function (metadata, key) {
         metadata[key] = Reflect.getMetadata(key, Decorated);
         return metadata;
     }, {});
     return metadata;
 }
 exports.extractMetadata = extractMetadata;
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = extractMetadata;
